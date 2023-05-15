@@ -1,0 +1,12 @@
+.app-container {
+    min-height: 350px;
+}
+
+.container-full{
+    width: 100%;
+    overflow: scroll;
+
+}
+html {
+    width: 100%;
+}
