@@ -25,7 +25,7 @@ function Nav() {
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle Navigation">
             <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <div className="dropdown" id="navbarSupportedContent">
   <ul className="navbar-nav mr-auto">
 
   <             NavLink href="/" exact className="nav-item nav-link">Home</NavLink>
@@ -33,7 +33,7 @@ function Nav() {
                 <NavLink href="/clientes" className="nav-item nav-link">Clientes</NavLink>
 
 
-    <li className="nav-item dropdown">
+{/*     <li className="nav-item dropdown">
       <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Dropdown
       </a>
@@ -43,7 +43,16 @@ function Nav() {
         <div className="dropdown-divider"></div>
         <a className="dropdown-item" href="#">Something else here</a>
       </div>
-    </li>
+    </li> */}
+
+<button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown button
+  </button>
+  <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a className="dropdown-item" href="#">Action</a>
+    <a className="dropdown-item" href="#">Another action</a>
+    <a className="dropdown-item" href="#">Something else here</a>
+  </div>
   </ul>
   <form className="form-inline my-2 my-lg-0">
     <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
