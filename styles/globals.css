@@ -10,3 +10,17 @@
 html {
     width: 100%;
 }
+
+.fit-card{
+    width: 80%;
+}
+
+.container-centered{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.extend-card{
+    width: 100%;
+}

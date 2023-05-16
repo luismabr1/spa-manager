@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import  moment from 'moment';
 import { Spinner } from 'components';
 import { Layout } from 'components/clientes';
+import Modal from 'components/Modal'
 import { clientService } from 'services';
 
 export default Index;
@@ -30,18 +31,18 @@ function Index() {
             <Link href="/clientes/add" className="btn btn-sm btn-success mb-2">Add Client</Link>
 
  {clients && clients.map(client =>
-            <div id="accordion" key={client.id}>
-            <div class="card">
-                <div class="card-header" id="headingOne">
-                <h5 class="mb-0">
-                    <button class="btn btn-link" data-bs-toggle="collapse" data-bs-target={'#collapse'+client.id} aria-expanded="true" aria-controls="collapseOne">
+            <div className='container-centered' id="accordion" key={client.id}>
+            <div className="card text-center fit-card">
+                <div className="card-header" id="headingOne">
+                <h5 className="mb-0">
+                    <button className="btn btn-link" data-bs-toggle="collapse" data-bs-target={'#collapse'+client.id} aria-expanded="true" aria-controls="collapseOne">
                     {client.username}
                     </button>
                 </h5>
                 </div>
 
-            <div id= {'collapse'+ client.id}   class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                <div class="card-body">
+            <div id= {'collapse'+ client.id}   className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div className="card-body">
                 <table className="table table-striped">
                             <thead>
                                 <tr>
@@ -58,7 +59,7 @@ function Index() {
                                         <td>{client.firstName}</td>
                                         <td>{client.lastName}</td>
                                         <td>{client.username}</td>
-                                        <td>{moment.utc(client.cita).format('MMMM/Do/YYYY, h:mm:ss a')}</td>
+                                        <td>{/* {moment.utc(client.cita).format('MMMM/Do/YYYY, h:mm:ss a')} */}<Modal cita={client.cita} /></td>
                                         <td style={{ whiteSpace: 'nowrap' }}>
                                             <Link href={`/clientes/edit/${client.id}`} className="btn btn-sm btn-primary me-1">Edit</Link>
                                             <button onClick={() => deleteClient(client.id)} className="btn btn-sm btn-danger btn-delete-user" style={{ width: '60px' }} disabled={client.isDeleting}>
