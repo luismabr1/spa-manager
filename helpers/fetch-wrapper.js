@@ -15,9 +15,8 @@ function request(method) {
     return (url, body) => {
         const requestOptions = {
             method,
-            headers:authHeader(url)
-
-
+            headers:authHeader(url), 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization'
         };
         if (body) {
             requestOptions.headers['Content-Type'] = 'application/json';
@@ -35,8 +34,7 @@ function authHeader(url) {
     const isLoggedIn = user?.token;
     const isApiUrl = url.startsWith(publicRuntimeConfig.apiUrl);
     if (isLoggedIn && isApiUrl) {
-        return { Authorization: `Bearer ${user.token}`, 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',  };
+        return { Authorization: `Bearer ${user.token}` };
     } else {
         return {};
     }
