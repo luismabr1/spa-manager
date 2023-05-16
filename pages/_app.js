@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
+import "bootstrap/dist/css/bootstrap.min.css";
 import 'styles/globals.css';
 
 import { userService } from 'services';
@@ -16,6 +17,9 @@ function App({ Component, pageProps }) {
 
     useEffect(() => {
         // on initial load - run auth check 
+        if (typeof window !== "undefined") {
+            require("bootstrap/dist/js/bootstrap.bundle.min.js");
+          }
         authCheck(router.asPath);
 
         // on route change start - hide page content by setting authorized to false  
