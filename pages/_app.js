@@ -17,10 +17,10 @@ function App({ Component, pageProps }) {
 
     useEffect(() => {
         // on initial load - run auth check 
+        authCheck(router.asPath);
         if (typeof window !== "undefined") {
             require("bootstrap/dist/js/bootstrap.bundle.min.js");
           }
-        authCheck(router.asPath);
 
         // on route change start - hide page content by setting authorized to false  
         const hideContent = () => setAuthorized(false);

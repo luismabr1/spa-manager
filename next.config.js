@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 require('dotenv').config()
-console.log(process.env.MONGO_URI)
+
 const nextConfig = {
     reactStrictMode: true,
     serverRuntimeConfig: {
