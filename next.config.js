@@ -5,7 +5,7 @@ const nextConfig = {
     reactStrictMode: true,
     serverRuntimeConfig: {
         connectionString: process.env.MONGO_URI,
-        secret: 'THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET, IT CAN BE ANY STRING'
+        secret: process.env.JWT_SECRET_KEY,
     },
     publicRuntimeConfig: {
         apiUrl: process.env.NODE_ENV === 'development'
