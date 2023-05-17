@@ -75,12 +75,116 @@ function AddEdit(props) {
                     <input name="firstName" type="text" {...register('firstName')} className={`form-control ${errors.firstName ? 'is-invalid' : ''}`} />
                     <div className="invalid-feedback">{errors.firstName?.message}</div>
                 </div>
-                <div className="mb-3 col">
+                <div className="mb-3">
                     <label className="form-label">Last Name</label>
                     <input name="lastName" type="text" {...register('lastName')} className={`form-control ${errors.lastName ? 'is-invalid' : ''}`} />
                     <div className="invalid-feedback">{errors.lastName?.message}</div>
                 </div>
+                <div className="mb-3">
+                    <label className="form-label">Ocupacion</label>
+                    <input  name="firstName" type="text" {...register('firstName')} className={`form-control ${errors.firstName ? 'is-invalid' : ''}`} />
+                    <div className="invalid-feedback">{errors.firstName?.message}</div>
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Barrio</label>
+                    <input  name="lastName" type="text" {...register('lastName')} className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}  />
+                    <div className="invalid-feedback">{errors.lastName?.message}</div>
+                </div>
+                <div class="col-md-4">
+                        <label for="validationServerUsername" className="form-label">Correo</label>
+                        <div className="input-group has-validation">
+                            <span className="input-group-text" id="inputGroupPrepend3">@</span>
+                            <input type="email" className="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required />
+                            <div id="validationServerUsernameFeedback" className="invalid-feedback">
+                                Ingrese un correo electronico valido.
+                            </div>
+                        </div>
+                </div>
                 <div className="mb-3 col">
+                    <label className="form-label">Como se entero</label>
+                   {/*  <input  name="lastName" type="text" {...register('lastName')} className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}  /> */}
+{/*                     <div className="invalid-feedback">{errors.lastName?.message}</div> */}
+                    <select className={`form-control ${errors.lastName ? 'is-invalid' : ''} form-select size="7"`} name="how"  aria-label="Default select example">
+                            <option selected>Open this select menu</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                    </select>
+                    <div className="invalid-feedback">{errors.lastName?.message}</div>
+                </div>
+                <div className="mb-3 col">
+                    <label className="form-label">Tipo de consulta</label>
+{/*                     <input  name="lastName" type="text" {...register('lastName')} className={`form-control ${errors.lastName ? 'is-invalid' : ''}`} />
+                    <div className="invalid-feedback">{errors.lastName?.message}</div> */}
+                    <select className={`form-control ${errors.lastName ? 'is-invalid' : ''} form-select size="7"`} name="how"  aria-label="Default select example">
+                            <option selected>Open this select menu</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                    </select>
+                </div>
+                
+                <div className="mb-3">
+                    <label className="form-label">Fecha de nacimiento</label>
+ {/*                    <Calendar name='cita' className={`form-control ${errors.cita ? 'is-invalid' : ''}` } {...register('cita')}/>
+                    <input name="cita" type="text" {...register('cita')}  />  */}
+                    <Controller
+                        control={control}
+                        name='cita'
+                        /* {...register('cita')} */
+                        render={({ field }) => (
+                        <DatePicker
+                            placeholderText='Select date'
+                            className={`form-control ${errors.cita ? 'is-invalid' : ''}` }
+                           /*  onChange={(date) => field.onChange(date)} */
+                            selected={field.value}
+                            showIcon        
+                            dateFormat="MM/dd/yyyy h:mm aa"      
+                            showTimeSelect        
+                            timeFormat="p"
+                            locale="es-VE"
+                        />
+                    )}
+                    />
+            
+                    <div className="invalid-feedback">{errors.cita?.message}</div>
+                </div>
+
+
+
+{/*                 <div className="mb-3">
+                    <label className="form-label">Correo</label>
+                    <input  name="lastName" type="text" {...register('lastName')} className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}  />
+                    <div className="invalid-feedback">{errors.lastName?.message}</div>
+                </div> */}
+                
+                <div className="mb-3 col">
+                    <label className="form-label">Edad</label>
+                    <input  name="lastName" type="text" {...register('lastName')} className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}  />
+                    <div className="invalid-feedback">{errors.lastName?.message}</div>
+                </div>
+                <div className="mb-3 col">
+{/*                 <input type="radio" id="html" name="sexo" value="HTML"/> */}
+                    <label className="form-label">Sexo</label><br/>
+                        <input type="radio" id="h" name="sexo" value="CSS" />
+                        <label for="h">Hombre</label><br/>
+                        <input type="radio" id="m" name="sexo" value="JavaScript" />
+                        <label for="m">Mujer</label><br/>
+
+                    {/* <input  name="lastName" type="text" {...register('lastName')} className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}  /> */}
+                    <div className="invalid-feedback">{errors.lastName?.message}</div>
+                </div>
+                <div className="mb-3 col">
+                    <label className="form-label">Telefono</label>
+                    <input  name="lastName" type="text" {...register('lastName')} className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}  />
+                    <div className="invalid-feedback">{errors.lastName?.message}</div>
+                </div>
+                <div className="mb-3 col">
+                    <label className="form-label">Celular</label>
+                    <input  name="lastName" type="text" {...register('lastName')} className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}  />
+                    <div className="invalid-feedback">{errors.lastName?.message}</div>
+                </div>
+                <div className="mb-3">
                     <label className="form-label">Cita</label>
  {/*                    <Calendar name='cita' className={`form-control ${errors.cita ? 'is-invalid' : ''}` } {...register('cita')}/>
                     <input name="cita" type="text" {...register('cita')}  />  */}
@@ -108,12 +212,13 @@ function AddEdit(props) {
   
             </div>
             <div className="row">
-                <div className="mb-3 col">
-                    <label className="form-label">Username</label>
-                    <input name="username" type="text" {...register('username')} className={`form-control ${errors.username ? 'is-invalid' : ''}`} />
+{/*                 <div className="mb-3 input-group has-validation">
+                    <label className="form-label">Username2</label>
+                    <input name="username" type="text" {...register('username')} className={`form-control ${errors.username ? 'is-invalid' : ''} is-invalid`} />
                     <div className="invalid-feedback">{errors.email?.message}</div>
-                </div>
-                <div className="mb-3 col">
+                </div> */}
+
+                <div className="mb-3">
                     <label className="form-label">
                         Password
                         {cliente && <em className="ms-1">(Leave blank to keep the same password)</em>}
