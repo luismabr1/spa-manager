@@ -41,15 +41,15 @@ function Login() {
                 <div className="card-body">
                     <form onSubmit={handleSubmit(onSubmit)}>
                          <div className="mb-3">
-                            <label className="form-label">Telefono</label>
+                            <label className="form-label">Usuario</label>
                             <input name="username" type="text" {...register('username')} className={`form-control ${errors.username ? 'is-invalid' : ''}`} />
                             <div className="invalid-feedback">{errors.username?.message}</div>
                         </div> 
-{/*                         <div className="mb-3">
+                       <div className="mb-3">
                             <label className="form-label">Password</label>
                             <input name="password" type="text" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
                             <div className="invalid-feedback">{errors.password?.message}</div>
-                        </div> */}
+                        </div> 
                         <button disabled={formState.isSubmitting} className="btn btn-primary">
                             {formState.isSubmitting && <span className="spinner-border spinner-border-sm me-1"></span>}
                             Login

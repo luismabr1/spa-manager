@@ -21,16 +21,8 @@ export const userService = {
     delete: _delete
 };
 
-async function login(username/* , password */) {
-    const user = await fetchWrapper.post(`${baseUrl}/authenticate`, { username/* , password */ });
-
-    // publish user to subscribers and store in local storage to stay logged in between page refreshes
-    userSubject.next(user);
-    localStorage.setItem('user', JSON.stringify(user));
-}
-
-async function login2(username, password) {
-    const user = await fetchWrapper.post(`${baseUrl}/authenticate`, { username, password });
+async function login(username, password ) {
+    const user = await fetchWrapper.post(`${baseUrl}/authenticate`, { username , password });
 
     // publish user to subscribers and store in local storage to stay logged in between page refreshes
     userSubject.next(user);
