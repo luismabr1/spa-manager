@@ -4,7 +4,7 @@
 
 .container-full{
     width: 100%;
-    overflow: scroll;
+    overflow: hidden;
 
 }
 html {
@@ -12,7 +12,10 @@ html {
 }
 
 .fit-card{
-    width: 80%;
+    width: 500vh;
+    display: grid;
+    justify-content: center;
+    align-items: center;
 }
 
 .container-centered{

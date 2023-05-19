@@ -30,13 +30,17 @@ function Index() {
             <h1>Clients</h1>
 
             <Link href="/clientes/add" className="btn btn-sm btn-success mb-2">Add Client</Link><br/>
+            <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
  {clients && clients.map(client =>
-            <div className='container-sm align-items-center pe-auto btn btn-outline-primary' id='accordion' data-bs-toggle="collapse" data-bs-target={'#collapse'+client.id} aria-expanded="true" aria-controls="collapseOne" key={client.id}>
+            <div className='container align-items-center pe-auto btn' id='accordion' data-bs-toggle="collapse" data-bs-target={'#collapse'+client.id} aria-expanded="true" aria-controls="collapseOne" key={client.id}>
                 <div className='col' id="headingOne">
                     <span>
-                        <h5 className="blockquote" >
+                        <h4 className="blockquote" >
                             {client.username}
-                        </h5>
+                        </h4>
                     </span>
                 </div>
             <div className="card row align-items-start">
