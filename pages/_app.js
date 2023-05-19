@@ -2,11 +2,15 @@ import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
+
+import { Analytics } from '@vercel/analytics/react';
+ 
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'styles/globals.css';
 
 import { userService } from 'services';
 import { Nav, Alert } from 'components';
+
 
 export default App;
 
@@ -62,7 +66,12 @@ function App({ Component, pageProps }) {
                 <Nav />
                 <Alert />
                 {authorized &&
+                <>
+                
                     <Component {...pageProps} />
+                    <Analytics />
+                
+                </>
                 }
             </div>
         </>
