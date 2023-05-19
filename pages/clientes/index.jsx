@@ -28,20 +28,20 @@ function Index() {
     return (
         <Layout>
             <h1>Clients</h1>
-            <Link href="/clientes/add" className="btn btn-sm btn-success mb-2">Add Client</Link>
 
+            <Link href="/clientes/add" className="btn btn-sm btn-success mb-2">Add Client</Link><br/>
  {clients && clients.map(client =>
-            <div className='container-centered' id="accordion" key={client.id}>
-            <div className="card text-center fit-card">
-                <div className="card-header" id="headingOne">
-                <h5 className="mb-0">
-                    <button className="btn btn-link" data-bs-toggle="collapse" data-bs-target={'#collapse'+client.id} aria-expanded="true" aria-controls="collapseOne">
-                    {client.username}
-                    </button>
-                </h5>
+            <div className='container-sm align-items-center pe-auto btn btn-outline-primary' id='accordion' data-bs-toggle="collapse" data-bs-target={'#collapse'+client.id} aria-expanded="true" aria-controls="collapseOne" key={client.id}>
+                <div className='col' id="headingOne">
+                    <span>
+                        <h5 className="blockquote" >
+                            {client.username}
+                        </h5>
+                    </span>
                 </div>
+            <div className="card row align-items-start">
 
-            <div id= {'collapse'+ client.id}   className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div id= {'collapse'+ client.id}   className="collapse" aria-labelledby="headingOne" data-bs-parent="#accordion" >
                 <div className="card-body">
                 <table className="table table-striped">
                             <thead>
@@ -99,4 +99,50 @@ function Index() {
 
         </Layout>
     );
+
+
+
 }
+ <div id="accordion">
+
+  <div class="card">
+    <div class="card-header">
+      <a class="btn" data-bs-toggle="collapse" href="#collapseOne">
+        Collapsible Group Item #1
+      </a>
+    </div>
+
+    <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+      <div class="card-body">
+        Lorem ipsum..
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseTwo">
+        Collapsible Group Item #2
+      </a>
+    </div>
+    <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
+      <div class="card-body">
+        Lorem ipsum..
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseThree">
+        Collapsible Group Item #3
+      </a>
+    </div>
+    <div id="collapseThree" class="collapse" data-bs-parent="#accordion">
+      <div class="card-body">
+        Lorem ipsum..
+      </div>
+    </div>
+  </div>
+
+</div> 

@@ -23,15 +23,16 @@ function Nav() {
                 <span className="navbar-toggler-icon"></span>
             </button> */}
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle Navigation">
+
             <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="dropdown" id="navbarSupportedContent">
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul className="navbar-nav mr-auto">
 
                   <             NavLink href="/" exact className="nav-item nav-link">Home</NavLink>
                                 <NavLink href="/users" className="nav-item nav-link">Users</NavLink>
                                 <NavLink href="/clientes" className="nav-item nav-link">Clientes</NavLink>
-                                <button onClick={userService.logout} className="btn btn-link nav-item nav-link">Logout</button>
+                                <button onClick={userService.logout} className="nav-item nav-link btn btn-link">Logout</button>
 
 
                     {/* <li className="nav-item dropdown">

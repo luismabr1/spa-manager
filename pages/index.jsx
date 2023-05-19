@@ -13,7 +13,6 @@ function Home() {
                 <p>You&apos;re logged.</p>
                 <p><Link href="/users">Administrar usuarios</Link></p>
             </div>
-            <Calendar />
         </div>
     );
 }

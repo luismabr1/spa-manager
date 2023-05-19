@@ -90,7 +90,7 @@ function AddEdit(props) {
                     <input  name="lastName" type="text" {...register('lastName')} className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}  />
                     <div className="invalid-feedback">{errors.lastName?.message}</div>
                 </div>
-                <div class="col-md-4">
+                <div className="col-md-4">
                         <label for="validationServerUsername" className="form-label">Correo</label>
                         <div className="input-group has-validation">
                             <span className="input-group-text" id="inputGroupPrepend3">@</span>
