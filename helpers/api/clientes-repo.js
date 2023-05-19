@@ -10,6 +10,7 @@ export const clientsRepo = {
     authenticate,
     getAll,
     getById,
+    search,
     create,
     update,
     delete: _delete
@@ -38,6 +39,16 @@ async function getAll() {
 async function getById(id) {
     return await Client.findById(id);
 }
+
+async function search(searchTerm) {
+    return await Client.find({
+      $or: [
+        { username: { $regex: searchTerm, $options: 'i' } },
+        { firstName: { $regex: searchTerm, $options: 'i' } },
+        { lastName: { $regex: searchTerm, $options: 'i' } }
+      ]
+    });
+  }
 
 async function create(params) {
     // validate

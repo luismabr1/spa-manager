@@ -1,9 +1,9 @@
 import { BehaviorSubject } from 'rxjs';
 import getConfig from 'next/config';
-import Router from 'next/router';
+/* import Router from 'next/router'; */
 
 import { fetchWrapper } from 'helpers';
-import { alertService } from './alert.service';
+/* import { alertService } from './alert.service'; */
 
 const { publicRuntimeConfig } = getConfig();
 const baseUrl = `${publicRuntimeConfig.apiUrl}/clients`;
