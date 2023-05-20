@@ -58,7 +58,7 @@ function Index() {
         <>
         
 
-        <div className='container-sm'>
+        <div className='container'>
         <h1>Clients</h1>
 
                     <Link href="/clientes/add" className="btn btn-sm btn-success mb-2">Add Client</Link><br/>
@@ -75,7 +75,6 @@ function Index() {
 
         </div>
 <Layout>
-{/*     <button class="btn btn-outline-success" type="submit">Search</button> */}
 
 <div id="accordion">
 {filteredClients && filteredClients.map(client =>
