@@ -1,7 +1,7 @@
 import React from 'react';
 import  moment from 'moment';
-
-const Modal = ({citas, id}) => {
+import ExportToPDF from 'components/ExportToPDF';
+const Modal = ({citas, id, clientes}) => {
     return (
         <>
 
@@ -24,7 +24,7 @@ Consultar
       </div>
       <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" className="btn btn-primary">Imprimir</button>
+        <ExportToPDF clientes={clientes} id={id} />
       </div>
     </div>
   </div>
