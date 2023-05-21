@@ -9,7 +9,8 @@ mongoose.Promise = global.Promise;
 
 export const db = {
     User: userModel(),
-    Client: clientModel()
+    Client: clientModel(),
+/*     Cita: citaModel()  */
 };
 
 // mongoose models with schema definitions
@@ -33,8 +34,8 @@ function userModel() {
             delete ret.hash;
         }
     });
-
-    return mongoose.models.User || mongoose.model('User', schema);
+/*     export default mongoose.models?.User || mongoose.model('User', schema); */
+     return mongoose.models?.User || mongoose.model('User', schema); 
 }
 
 function clientModel() {
@@ -58,5 +59,23 @@ function clientModel() {
         }
     });
 
-    return mongoose.models.Client || mongoose.model('Client', schema);
-}
+    return mongoose.models?.Client || mongoose.model('Client', schema);
+} 
+
+/* function citaModel() {
+    const schema = new Schema({
+        clientId: { type: Schema.Types.ObjectId, ref: 'Client' }, // ID del cliente asociado
+        cita: { type: Date, required: true }
+      }, {
+        // add createdAt and updatedAt timestamps
+        timestamps: true
+      });
+  
+    schema.set('toJSON', {
+      virtuals: true,
+      versionKey: false,
+    });
+  
+    return mongoose.models?.Cita || mongoose.model('Cita', schema);
+} */
+

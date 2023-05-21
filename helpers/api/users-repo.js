@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 import { db } from 'helpers/api';
 
 const { serverRuntimeConfig } = getConfig();
-const User = db.User;
+const User = db && db.User;
 
 export const usersRepo = {
     authenticate,
@@ -32,6 +32,10 @@ async function authenticate({ username, password }) {
 }
 
 async function getAll() {
+    if (!User) {
+        throw new Error('User model is not defined');
+    }
+
     return await User.find();
 }
 
