@@ -4,7 +4,7 @@ import ExportToPDF from 'components/ExportToPDF';
 import { clientsRepo } from 'helpers/api';
 
 const Modal = ({ id, clientes }) => {
-/*   const [citas, setCitas] = useState([]);
+  const [citas, setCitas] = useState([]);
 
   useEffect(() => {
     async function fetchCitas() {
@@ -17,9 +17,9 @@ const Modal = ({ id, clientes }) => {
     }
 
     fetchCitas();
-  }, [id]); */
+  }, [id]);
 
-/*   const createCita = async () => {
+   const createCita = async () => {
     try {
       // Lógica para crear una nueva cita asociada al ID del cliente
       await clientsRepo.createCita(id);
@@ -29,7 +29,7 @@ const Modal = ({ id, clientes }) => {
     } catch (error) {
       console.error('Error creating cita:', error);
     }
-  };  */
+  };  
 
     return (
     <>

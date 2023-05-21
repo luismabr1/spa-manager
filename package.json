@@ -22,7 +22,7 @@
         "jspdf": "2.5.1",
         "moment": "2.29.4",
         "mongodb": "5.2.0",
-        "mongoose": "7.0.3",
+        "mongoose": "^7.2.0",
         "next": "13.2.4",
         "prop-types": "15.8.1",
         "react": "18.2.0",

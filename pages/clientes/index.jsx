@@ -94,7 +94,7 @@ function Index() {
                                                         <td>{client.firstName}</td>
                                                         <td>{client.lastName}</td>
                                                         <td>{client.username}</td>
-                                                        <td>{/* {moment.utc(client.cita).format('MMMM/Do/YYYY, h:mm:ss a')} */}{/* <Modal citas={client.cita} id={client.id} clientes={clients} /> */}MODAL</td>
+                                                        <td>{/* {moment.utc(client.cita).format('MMMM/Do/YYYY, h:mm:ss a')} */}{ <Modal citas={client.cita} id={client.id} clientes={clients} /> }MODAL</td>
                                                         <td style={{ whiteSpace: 'nowrap' }}>
                                                             <Link href={`/clientes/edit/${client.id}`} className="btn btn-sm btn-primary me-1">Edit</Link>
                                                             <button onClick={() => deleteClient(client.id)} className="btn btn-sm btn-danger btn-delete-user" style={{ width: '60px' }} disabled={client.isDeleting}>

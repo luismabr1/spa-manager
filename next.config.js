@@ -3,6 +3,7 @@ require('dotenv').config()
 
 const nextConfig = {
     reactStrictMode: true,
+
     serverRuntimeConfig: {
         connectionString: process.env.MONGO_URI,
         secret: process.env.JWT_SECRET_KEY,
