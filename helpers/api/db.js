@@ -4,13 +4,15 @@ import mongoose from 'mongoose';
 const { serverRuntimeConfig } = getConfig();
 const Schema = mongoose.Schema;
 
-mongoose.connect(process.env.MONGODB_URI || serverRuntimeConfig.connectionString);
-mongoose.Promise = global.Promise;
 
-export const db = {
-    User: userModel(),
-    Client: clientModel()
-};
+mongoose.connect(process.env.MONGODB_URI || serverRuntimeConfig.connectionString)
+mongoose.Promise = global.Promise;
+  
+  export const db = {
+      User: userModel(),
+      Client: clientModel()
+  }
+
 
 // mongoose models with schema definitions
 
