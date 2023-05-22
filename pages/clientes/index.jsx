@@ -1,29 +1,15 @@
 import Link from 'next/link';
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import  moment from 'moment';
 import { Spinner } from 'components';
 import { Layout } from 'components/clientes';
 import Modal from 'components/Modal'
 import { clientService } from 'services';
-
 export default Index;
 
 function Index() {
     const [clients, setClients] = useState('');
     const [searchTerm, setSearchTerm] = useState(null);
 
-/*     useEffect(() => {
-        clientService.getAll().then(x => setClients(x));
-    }, []); */
-/*     useEffect(() => {
-        if (searchTerm) {
-            clientService.search(searchTerm).then((results) => {
-                setClients(results);
-            });
-        } else {
-            clientService.getAll().then((x) => setClients(x));
-        }
-    }, [searchTerm]); */
 
     const filteredClients = useMemo(() => {
         if (searchTerm) {
@@ -58,7 +44,7 @@ function Index() {
         <>
         
 
-        <div className='container-sm'>
+        <div className='container'>
         <h1>Clients</h1>
 
                     <Link href="/clientes/add" className="btn btn-sm btn-success mb-2">Add Client</Link><br/>
@@ -75,7 +61,6 @@ function Index() {
 
         </div>
 <Layout>
-{/*     <button class="btn btn-outline-success" type="submit">Search</button> */}
 
 <div id="accordion">
 {filteredClients && filteredClients.map(client =>
@@ -109,7 +94,7 @@ function Index() {
                                                         <td>{client.firstName}</td>
                                                         <td>{client.lastName}</td>
                                                         <td>{client.username}</td>
-                                                        <td>{/* {moment.utc(client.cita).format('MMMM/Do/YYYY, h:mm:ss a')} */}<Modal citas={client.cita} id={client.id} /></td>
+                                                        <td>{/* {moment.utc(client.cita).format('MMMM/Do/YYYY, h:mm:ss a')} */}{ <Modal citas={client.cita} id={client.id} clientes={clients} /> }MODAL</td>
                                                         <td style={{ whiteSpace: 'nowrap' }}>
                                                             <Link href={`/clientes/edit/${client.id}`} className="btn btn-sm btn-primary me-1">Edit</Link>
                                                             <button onClick={() => deleteClient(client.id)} className="btn btn-sm btn-danger btn-delete-user" style={{ width: '60px' }} disabled={client.isDeleting}>

@@ -3,6 +3,7 @@ require('dotenv').config()
 
 const nextConfig = {
     reactStrictMode: true,
+
     serverRuntimeConfig: {
         connectionString: process.env.MONGO_URI,
         secret: process.env.JWT_SECRET_KEY,
@@ -12,6 +13,10 @@ const nextConfig = {
             ? 'http://localhost:3000/api' // development api
             : 'http://localhost:3000/api' // production api
     }
+            ? 'http://localhost:3000/api' // development api
+            : 'http://localhost:3000/api' // production api
+    },
 }
+
 
 module.exports = nextConfig

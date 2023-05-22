@@ -12,7 +12,7 @@ html {
 }
 
 .fit-card{
-    width: 500vh;
+    width: 100%;
     display: grid;
     justify-content: center;
     align-items: center;
