@@ -1,32 +1,36 @@
-import React, {useEffect} from 'react';
+import React, {useEffect,useState} from 'react';
 import  moment from 'moment';
 import ExportToPDF from 'components/ExportToPDF';
 import { AddEdit } from 'components/citas';
+import { citaService } from 'services';
 
 
-const Modal = ({citas, id, clientes}) => {
-   useEffect(() => {
+const Modal = ({clientId, clientes}) => {
+  const [appointment, setCitas] = useState('')
+  console.log('valor de appointment hoy',appointment)
+  useEffect(() => {
     async function fetchCitas() {
       try {
-        const citas = await clientsRepo.getCitasByClientId(id);
-        setCitas(citas);
+        const citas = await citaService.getCLientWithCitaById(clientId);
+        console.log('esta es la fecha que trae de citas', citas)
+        setCitas(citas); 
       } catch (error) {
         console.error('Error fetching citas:', error);
       }
     }
   
     fetchCitas();
-  }, [id]);  
+  }, [clientId]);  
 
     return (
         <>
 
 
-<button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={'#modal'+ id}>
+<button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={'#modal'+ clientId}>
 Consultar
 </button>
 
-<div className="modal fade" id={'modal'+ id} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div className="modal fade" id={'modal'+ clientId} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog" role="document">
     <div className="modal-content">
       <div className="modal-header">
@@ -36,13 +40,17 @@ Consultar
         </button>
       </div>
       <div className="modal-body">
-         {moment.utc(citas).format('MMMM/Do/YYYY, h:mm:ss a')}
+        { appointment 
+         ? moment.utc().format('MMMM/Do/YYYY, h:mm:ss a')
+         :
+         <AddEdit clientId={clientId} citaId={appointment}/>
+        }
+
       </div>
 
-         <AddEdit clientId={id}/>
       <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <ExportToPDF clientes={clientes} id={id} />
+        <ExportToPDF clientes={clientes} id={clientId} />
       </div>
     </div>
   </div>

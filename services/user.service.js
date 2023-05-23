@@ -7,6 +7,7 @@ import { alertService } from './alert.service';
 
 const { publicRuntimeConfig } = getConfig();
 const baseUrl = `${publicRuntimeConfig.apiUrl}/users`;
+console.log(baseUrl)
 const userSubject = new BehaviorSubject(typeof window !== 'undefined' && JSON.parse(localStorage.getItem('user')));
 
 export const userService = {
@@ -22,9 +23,7 @@ export const userService = {
 };
 
 async function login(username , password ) {
-    console.log('user service', username)
     const user = await fetchWrapper.post(`${baseUrl}/authenticate`, { username, password  });
-    console.log(user)
     // publish user to subscribers and store in local storage to stay logged in between page refreshes
     userSubject.next(user);
     localStorage.setItem('user', JSON.stringify(user));

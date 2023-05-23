@@ -7,14 +7,14 @@ const { serverRuntimeConfig } = getConfig();
 const Client = db.Client;
 const Cita = db.Cita;
 
-export const clientsRepo = {
+export const citaRepo = {
     authenticate,
     getAll,
     getById,
     search,
     create,
     createCita,
-    getCitasByClientId,
+    getCLientWithCitaById,
     update,
     delete: _delete
 };
@@ -36,11 +36,17 @@ async function authenticate({ username, password }) {
 }
 
 async function getAll() {
-    return await Client.find();
+    return await Cita.find();
 }
 
 async function getById(id) {
-    return await Client.findById(id);
+    return await Cita.findById(id);
+}
+
+async function getCLientWithCitaById(id){
+  cita = await Cita.findById(id);
+
+  return cita.clientId
 }
 
 async function search(searchTerm) {
@@ -55,19 +61,19 @@ async function search(searchTerm) {
 
 async function create(params) {
     // validate
-    if (await Client.findOne({ username: params.username })) {
-        throw 'Username "' + params.username + '" is already taken';
-    }
-
-    const cliente = new Client(params);
+/*     if (await Cita.findOne({ cita: params.clienId })) {
+        throw 'Cita "' + params.clientId + '" is already taken';
+    } */
+    console.log(params)
+    const cita = new Cita(params);
 
     // hash password
-    if (params.password) {
-        cliente.hash = bcrypt.hashSync(params.password, 10);
+/*     if (params.password) {
+      cita.hash = bcrypt.hashSync(params.password, 10);
     }
-
+ */
     // save cliente
-    await cliente.save();
+    await cita.save();
 }
 
 async function createCita(params){

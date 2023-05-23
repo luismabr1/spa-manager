@@ -24,7 +24,6 @@ function Login() {
     const { errors } = formState;
 
     function onSubmit({ username ,  password}) {
-        console.log(username, password)
         alertService.clear();
         return userService.login(username ,  password )
             .then(() => {

@@ -5,7 +5,6 @@ export default apiHandler({
 });
 
 async function authenticate(req, res) {
-    console.log(req)
     const user = await usersRepo.authenticate(req.body);
     return res.status(200).json(user);
 }

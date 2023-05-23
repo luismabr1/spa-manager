@@ -8,22 +8,23 @@ import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import * as Yup from 'yup';
 
 import { citaService, alertService } from 'services';
-import Calendar from 'components/Calendar';
 
 export { AddEdit };
 
 function AddEdit(props) {
+    console.log(props)
     const clienteId = props?.clientId;
+    const citaId = props?.citaId
     const router = useRouter();
 
     const validationSchema = Yup.object().shape({
-        cita: Yup.string()
-            .required('Fecha is required'),
+      cita: Yup.string()
+      .required('Fecha is required'),
     });
 
     const formOptions = {
         resolver: yupResolver(validationSchema),
-        defaultValues: clienteId ? { ...clienteId } : {}
+        defaultValues: clienteId ? { ...clienteId } : {} 
     };
 
     // set default form values if in edit mode
@@ -35,14 +36,16 @@ function AddEdit(props) {
     const { control, register, handleSubmit, reset, formState } = useForm(formOptions);
     const { errors } = formState;
 
-    const onSubmit = async (data) => {
-        alertService.clear();
-        try {
+    async function onSubmit(data) {
+      console.log('estoy en addEdit')
+      alertService.clear();
+      try {
+          console.log(data)
             let message;
-            if (cliente) {
-                await citaService.update(cliente.id, data);
-                message = 'Cita updated';
-            } else {
+            if (await citaService.getById(clienteId)) {
+/*                 await citaService.update(citaId, data);
+                message = 'Cita updated'; */
+            
                 await citaService.register(data);
                 message = 'Cita added';
             }
@@ -57,28 +60,32 @@ function AddEdit(props) {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="row">
-            <input type="hidden" value={clienteId}  />
+          <div className="row"> 
+          <div className="mb-3 col">
+                    <input name="clientId" value={clienteId} type="hidden" {...register('clientId')} className={`form-control ${errors.clientId ? 'is-invalid' : ''}`} />
+                    <div className="invalid-feedback">{errors.clientId?.message}</div>
+                </div>
+            {/* <input type="hidden" value={clienteId} name="clientId" {...register('clientId')} /> */}
            <div className="mb-3">
               <label className="form-label">Cita</label>
               <Controller
                 control={control}
-                name="appointment"
+                name="cita"
                 render={({ field }) => (
                   <DatePicker
-                    placeholderText="Select date"
-                    className={`form-control ${errors.appointment ? 'is-invalid' : ''}`}
+                  placeholderText="Select date"
+                    className={`form-control ${errors.cita ? 'is-invalid' : ''}`}
                     onChange={(date) => field.onChange(date)}
                     selected={field.value}
                     showIcon
                     dateFormat="MM/dd/yyyy h:mm aa"
                     showTimeSelect
                     timeFormat="p"
-                    locale="es-VE"
+                    /* locale="es-VE" */
                   />
                 )}
               />
-              <div className="invalid-feedback">{errors.appointment?.message}</div>
+              <div className="invalid-feedback">{errors.cita?.message}</div>
             </div>
           </div>
 

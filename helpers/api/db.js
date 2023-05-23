@@ -64,8 +64,10 @@ function clientModel() {
 
 function citaModel() {
   const schema = new Schema({
-    clientId: { type: Schema.Types.ObjectId, ref: 'Client' },
-    cita: { type: Date, required: true }
+    cita: { type: Date, required: true },
+    clientId: { 
+        type: Schema.Types.ObjectId, 
+        ref: 'Client' },
   }, {
     timestamps: true
   });
