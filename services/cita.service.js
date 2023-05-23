@@ -79,4 +79,4 @@ async function _delete(id) {
     if (id === citaSubject.value.id) {
         logout();
     }
-}
+} 

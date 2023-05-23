@@ -35,7 +35,7 @@ function userModel() {
         }
     });
 
-    return mongoose.models.User || mongoose.model('User', schema);
+    return mongoose.models?.User || mongoose.model('User', schema);
 }
 
 function clientModel() {

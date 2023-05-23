@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,7 +13,7 @@ import Calendar from 'components/Calendar';
 export { AddEdit };
 
 function AddEdit(props) {
-    const cliente = props?.clientId;
+    const clienteId = props?.clientId;
     const router = useRouter();
 
     const validationSchema = Yup.object().shape({
@@ -23,12 +23,12 @@ function AddEdit(props) {
 
     const formOptions = {
         resolver: yupResolver(validationSchema),
-        defaultValues: cliente ? { ...cliente } : {}
+        defaultValues: clienteId ? { ...clienteId } : {}
     };
 
     // set default form values if in edit mode
-    if (cliente) {
-        formOptions.defaultValues = props.cliente;
+    if (clienteId) {
+        formOptions.defaultValues = props.clienteId;
     }
 
     // get functions to build form with useForm() hook
@@ -58,7 +58,7 @@ function AddEdit(props) {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="row">
-            <input type="hidden" value={clientId}  />
+            <input type="hidden" value={clienteId}  />
            <div className="mb-3">
               <label className="form-label">Cita</label>
               <Controller
@@ -91,8 +91,8 @@ function AddEdit(props) {
             <Link href="/clientes" className="btn btn-link">Cancel</Link>
           </div>
         </form>
-      );
-}
+      ); 
+} 
 
 
    

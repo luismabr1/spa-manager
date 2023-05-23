@@ -17,7 +17,8 @@ function request(method) {
             method,
             headers:authHeader(url), 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-        };
+        }
+        console.log(requestOptions)
         if (body) {
             requestOptions.headers['Content-Type'] = 'application/json';
             requestOptions.body = JSON.stringify(body);
@@ -29,10 +30,12 @@ function request(method) {
 // helper functions
 
 function authHeader(url) {
+    console.log('wrapper', url)
     // return auth header with jwt if user is logged in and request is to the api url
     const user = userService.userValue;
     const isLoggedIn = user?.token;
     const isApiUrl = url.startsWith(publicRuntimeConfig.apiUrl);
+    console.log('wrapper', isApiUrl)
     if (isLoggedIn && isApiUrl) {
         return { Authorization: `Bearer ${user.token}` };
     } else {
