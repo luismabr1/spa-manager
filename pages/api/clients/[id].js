@@ -15,13 +15,13 @@ async function getById(req, res) {
     return res.status(200).json(client);
 }
 
-/* async function createCita(req, res){
-    await cita = clientsRepo.createCita(req.query.clientId, req.query.citas);
+ async function createCita(req, res){
+     cita = await clientsRepo.createCita(req.query.clientId, req.query.citas);
 
     if (!cita) throw 'Cita no pudo crearse';
 
     return res.status(200).json(cita);
-} */
+} 
 
 async function update(req, res) {
     await clientsRepo.update(req.query.id, req.body);

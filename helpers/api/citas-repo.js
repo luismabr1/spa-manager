@@ -14,7 +14,7 @@ export const citaRepo = {
     search,
     create,
     createCita,
-    getCLientWithCitaById,
+    getCitaByClientId,
     update,
     delete: _delete
 };
@@ -43,10 +43,20 @@ async function getById(id) {
     return await Cita.findById(id);
 }
 
-async function getCLientWithCitaById(id){
-  cita = await Cita.findById(id);
+/* async function getCLientWithCitaById(id){
+  cita = await Cita.findById(id)
 
   return cita.clientId
+} */
+
+async function getCitaByClientId(clientId) {
+  
+/*   const cita = await Cita.findOne({ clientId }); */
+  const cita = await Cita.find({ "clientId":  clientId  }).exec() 
+  if (!cita) {
+    throw 'No se encontró ninguna cita para el cliente proporcionado';
+  }
+  return cita;
 }
 
 async function search(searchTerm) {

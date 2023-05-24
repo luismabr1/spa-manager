@@ -35,9 +35,9 @@ async function authenticate({ username, password }) {
     };
 }
 
-async function getAll() {
+ async function getAll() {
     return await Client.find();
-}
+} 
 
 async function getById(id) {
     return await Client.findById(id);

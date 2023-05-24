@@ -12,7 +12,7 @@ import { citaService, alertService } from 'services';
 export { AddEdit };
 
 function AddEdit(props) {
-    console.log(props)
+    console.log('estoy en el addedit de citas',props)
     const clienteId = props?.clientId;
     const citaId = props?.citaId
     const router = useRouter();
@@ -37,7 +37,7 @@ function AddEdit(props) {
     const { errors } = formState;
 
     async function onSubmit(data) {
-      console.log('estoy en addEdit')
+      console.log('estoy en addEdit', clienteId, data.cita)
       alertService.clear();
       try {
           console.log(data)
@@ -73,7 +73,7 @@ function AddEdit(props) {
                 name="cita"
                 render={({ field }) => (
                   <DatePicker
-                  placeholderText="Select date"
+                    placeholderText="Select date"
                     className={`form-control ${errors.cita ? 'is-invalid' : ''}`}
                     onChange={(date) => field.onChange(date)}
                     selected={field.value}

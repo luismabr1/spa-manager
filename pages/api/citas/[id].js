@@ -1,27 +1,36 @@
-import { apiHandler, clientsRepo, citaRepo } from 'helpers/api';
+import { apiHandler, citaRepo } from 'helpers/api';
 
 export default apiHandler({
-    get: getById,
+    get: getById, //esto esta raro pide algo por id, pide una cita no un usuario con una cita
     post: createCita,
-    put: update,
-    delete: _delete
+/*     put: update,
+    delete: _delete, */
+    get: getCitaByClientId,
 });
 
-async function getById(req, res) {
-    const client = await clientsRepo.getById(req.query.id);
+ async function getById(req, res) {
+    const client = await citaRepo.getById(req.query.id);
 
     if (!client) throw 'Client Not Found';
 
     return res.status(200).json(client);
 }
 
-async function getCLientWithCitaById(req, res) {
+/* async function getCitaByClientId(req, res) {
     const client = await clientsRepo.getById(req.query.id);
 
     if (!client) throw 'Client Not Found';
 
     return res.status(200).json(client);
-}
+} */
+async function getCitaByClientId(req, res) {
+    console.log('estoy en api/id',req.query.clientId)
+    const cita = await citaRepo.getCitaByClientId(req.query.clientId);
+  
+    if (!cita) throw 'Cita Not Found';
+  
+    return res.status(200).json(cita);
+  }
 
 
 async function createCita(req, res){
@@ -33,12 +42,12 @@ async function createCita(req, res){
     return res.status(200).json(cita);
 }
 
-async function update(req, res) {
+/* async function update(req, res) {
     await clientsRepo.update(req.query.id, req.body);
     return res.status(200).json({});
-}
+} */
 
-async function _delete(req, res) {
+/* async function _delete(req, res) {
     await clientsRepo.delete(req.query.id);
     return res.status(200).json({});
-}
+} */

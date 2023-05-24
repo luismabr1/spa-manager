@@ -7,13 +7,12 @@ import { citaService } from 'services';
 
 const Modal = ({clientId, clientes}) => {
   const [appointment, setCitas] = useState('')
-  console.log('valor de appointment hoy',appointment)
   useEffect(() => {
     async function fetchCitas() {
       try {
-        const citas = await citaService.getCLientWithCitaById(clientId);
-        console.log('esta es la fecha que trae de citas', citas)
-        setCitas(citas); 
+        const citas = await citaService.getCitaByClientId(clientId);
+        console.log(citas)
+        setCitas(citas.idCita); 
       } catch (error) {
         console.error('Error fetching citas:', error);
       }
@@ -41,7 +40,7 @@ Consultar
       </div>
       <div className="modal-body">
         { appointment 
-         ? moment.utc().format('MMMM/Do/YYYY, h:mm:ss a')
+         ? moment.utc(appointment).format('MMMM/Do/YYYY, h:mm:ss a')
          :
          <AddEdit clientId={clientId} citaId={appointment}/>
         }

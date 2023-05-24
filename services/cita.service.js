@@ -1,7 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import getConfig from 'next/config';
 
-
 import { fetchWrapper } from 'helpers';
 
 
@@ -17,7 +16,7 @@ export const citaService = {
     register,
     getAll,
     getById,
-    getCLientWithCitaById, 
+    getCitaByClientId, 
     update,
     delete: _delete
 };
@@ -31,9 +30,11 @@ async function getAll() {
     return await fetchWrapper.get(baseUrl);
 }
 
- async function getCLientWithCitaById(citaId) {
-    return await fetchWrapper.get(`${baseUrl}/${citaId}`);
-} 
+async function getCitaByClientId(clientId) {
+    console.log(`${baseUrl}/${clientId}`)
+    return await fetchWrapper.get(`${baseUrl}/${clientId}`); 
+  }
+
 async function getById(id) {
     return await fetchWrapper.get(`${baseUrl}/${id}`);
 }
