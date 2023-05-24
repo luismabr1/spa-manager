@@ -23,9 +23,9 @@ function Login() {
     const { register, handleSubmit, formState } = useForm(formOptions);
     const { errors } = formState;
 
-    function onSubmit({ username/* ,  password  */}) {
+    function onSubmit({ username ,  password}) {
         alertService.clear();
-        return userService.login(username/* ,  password */)
+        return userService.login(username ,  password )
             .then(() => {
                 // get return url from query parameters or default to '/'
                 const returnUrl = router.query.returnUrl || '/';
@@ -33,6 +33,7 @@ function Login() {
             })
             .catch(alertService.error);
     }
+    
 
     return (
         <Layout>

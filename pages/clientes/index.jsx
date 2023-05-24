@@ -65,10 +65,10 @@ function Index() {
 <div id="accordion">
 {filteredClients && filteredClients.map(client =>
 
-                <div class="card" key={client.id} style={{ width: '500px' }}>
-                <div class="card-header" >
+                <div className="card" key={client.id} style={{ width: '500px' }}>
+                <div className="card-header" >
 
-                    <a class="btn" style={{ width: '100%' }} data-bs-toggle="collapse" href={"#collapse" + client.id} >
+                    <a className="btn" style={{ width: '100%' }} data-bs-toggle="collapse" href={"#collapse" + client.id} >
                     <span >
                                 <h4 className="blockquote" >
                                     {client.username}
@@ -76,8 +76,8 @@ function Index() {
                     </span>
                     </a>
                 </div>
-                <div id={"collapse" + client.id}  class="collapse" data-bs-parent="#accordion">
-                    <div class="card-body" >
+                <div id={"collapse" + client.id}  className="collapse" data-bs-parent="#accordion">
+                    <div className="card-body" >
                     <table className="table table-striped" >
                                             <thead>
                                                 <tr>
@@ -94,7 +94,7 @@ function Index() {
                                                         <td>{client.firstName}</td>
                                                         <td>{client.lastName}</td>
                                                         <td>{client.username}</td>
-                                                        <td>{/* {moment.utc(client.cita).format('MMMM/Do/YYYY, h:mm:ss a')} */}{ <Modal citas={client.cita} id={client.id} clientes={clients} /> }MODAL</td>
+                                                        <td>{  <Modal clientId={client.id} />  }</td>
                                                         <td style={{ whiteSpace: 'nowrap' }}>
                                                             <Link href={`/clientes/edit/${client.id}`} className="btn btn-sm btn-primary me-1">Edit</Link>
                                                             <button onClick={() => deleteClient(client.id)} className="btn btn-sm btn-danger btn-delete-user" style={{ width: '60px' }} disabled={client.isDeleting}>

@@ -17,7 +17,8 @@ function request(method) {
             method,
             headers:authHeader(url), 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-        };
+        }
+        console.log(requestOptions)
         if (body) {
             requestOptions.headers['Content-Type'] = 'application/json';
             requestOptions.body = JSON.stringify(body);
