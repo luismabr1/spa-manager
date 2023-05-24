@@ -91,91 +91,47 @@ console.log(serverRuntimeConfig.connectionString)
         useUnifiedTopology: true
       }); */
 
-import getConfig from 'next/config';
-import mongoose from 'mongoose';
-
-const { serverRuntimeConfig } = getConfig();
-
-// Conexión a la base de datos
-mongoose.connect(process.env.MONGO_URI || serverRuntimeConfig.connectionString, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-const db = mongoose.connection;
-
-db.on('error', (error) => {
-  console.error('Error de conexión a la base de datos:', error);
-});
-
-db.once('connected', () => {
-  console.log('Conexión exitosa a la base de datos');
-
-  const Schema = mongoose.Schema;
-
-  // Definición de los esquemas de los modelos
-  const userSchema = new Schema({
-    username: { type: String, unique: true, required: true },
-    hash: { type: String, required: true },
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true }
-  }, {
-    timestamps: true // Agregar timestamps (createdAt, updatedAt)
-  });
-  
-  userSchema.set('toJSON', {
-    virtuals: true,
-    versionKey: false,
-    transform: function (doc, ret) {
-      delete ret._id;
-      delete ret.hash;
-    }
-  });
-  
-  const clientSchema = new Schema({
-    username: { type: String, unique: true, required: true },
-    hash: { type: String, required: true },
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
-    cita: { type: Date, required: true }
-  }, {
-    timestamps: true
-  });
-  
-  clientSchema.set('toJSON', {
-    virtuals: true,
-    versionKey: false,
-    transform: function (doc, ret) {
-      delete ret._id;
-      delete ret.hash;
-    }
-  });
-  
-  const citaSchema = new Schema({
-    clientId: { type: Schema.Types.ObjectId, ref: 'Client' },
-    cita: { type: Date, required: true }
-  }, {
-    timestamps: true
-  });
-  
-  citaSchema.set('toJSON', {
-    virtuals: true,
-    versionKey: false,
-  });
-  
-  // Definición de los modelos
-  const User = mongoose.models.User || mongoose.model('User', userSchema);
-  const Client = mongoose.models.Client || mongoose.model('Client', clientSchema);
-  const Cita = mongoose.models.Cita || mongoose.model('Cita', citaSchema);
-  
-  // Exportación de los modelos
-  export const db = {
-    User,
-    Client,
-    Cita
-  };
-})
-
+      const getConfig = require('next/config').default;
+      const mongoose = require('mongoose');
+      
+      const { serverRuntimeConfig } = getConfig();
+      
+      // Conexión a la base de datos
+      mongoose.connect(process.env.MONGO_URI || serverRuntimeConfig.connectionString, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
+      
+      const db = mongoose.connection;
+      
+      db.on('error', (error) => {
+        console.error('Error de conexión a la base de datos:', error);
+      });
+      
+      db.once('connected', () => {
+        console.log('Conexión exitosa a la base de datos');
+      
+        const Schema = mongoose.Schema;
+      
+        // Definición de los esquemas de los modelos
+        const userSchema = new Schema({
+          // ...
+        });
+      
+        // ...
+      
+        // Definición de los modelos
+        const User = mongoose.models.User || mongoose.model('User', userSchema);
+        const Client = mongoose.models.Client || mongoose.model('Client', clientSchema);
+        const Cita = mongoose.models.Cita || mongoose.model('Cita', citaSchema);
+      
+        // Exportación de los modelos
+        module.exports = {
+            User,
+            Client,
+            Cita,
+          };
+      });
 
 
 
