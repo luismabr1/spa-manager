@@ -52,7 +52,7 @@ async function getById(id) {
 async function getCitaByClientId(clientId) {
   
 /*   const cita = await Cita.findOne({ clientId }); */
-  const cita = await Cita.find({ "clientId":  clientId  }).exec() 
+  const cita = await Client.findOne({ clientId }).exec() 
   if (!cita) {
     throw 'No se encontró ninguna cita para el cliente proporcionado';
   }

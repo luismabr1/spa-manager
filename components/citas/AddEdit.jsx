@@ -37,7 +37,7 @@ function AddEdit(props) {
     const { errors } = formState;
 
     async function onSubmit(data) {
-      console.log('estoy en addEdit', clienteId, data.cita)
+      console.log('estoy en addEdit', clienteId, citaId)
       alertService.clear();
       try {
           console.log(data)

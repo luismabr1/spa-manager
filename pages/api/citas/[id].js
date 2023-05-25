@@ -24,7 +24,7 @@ export default apiHandler({
     return res.status(200).json(client);
 } */
 async function getCitaByClientId(req, res) {
-    console.log('estoy en api/id',req.query.clientId)
+    console.log('estoy en api/id', req.query.clientId)
     const cita = await citaRepo.getCitaByClientId(req.query.clientId);
   
     if (!cita) throw 'Cita Not Found';
@@ -35,8 +35,6 @@ async function getCitaByClientId(req, res) {
 
 async function createCita(req, res){
     cita = await citaRepo.create(req.query.clientId, req.query.citas);
-    console.log(cita)
-    console.log(req)
     if (!cita) throw 'Cita no pudo crearse';
 
     return res.status(200).json(cita);
