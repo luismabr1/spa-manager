@@ -37,13 +37,13 @@ function AddEdit(props) {
     const { errors } = formState;
 
     async function onSubmit(data) {
-      console.log('estoy en addEdit', clienteId, citaId)
+/*       console.log('estoy en addEdit', clienteId, citaId) */
       alertService.clear();
       try {
-          console.log(data)
+          console.log('del form addedit', data)
             let message;
-            if (await citaService.getById(clienteId)) {
-/*                 await citaService.update(citaId, data);
+            if (await citaService.getCitaByClientId(clienteId)) {
+/*              await citaService.update(citaId, data);
                 message = 'Cita updated'; */
             
                 await citaService.register(data);

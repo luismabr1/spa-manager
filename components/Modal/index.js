@@ -10,9 +10,11 @@ const Modal = ({clientId, clientes}) => {
   useEffect(() => {
     async function fetchCitas() {
       try {
-        const citas = await citaService.getCitaByClientId(appointment);
-        console.log('modal fetchcita', citas)
-        setCitas(citas.cita); 
+/*         console.log('cliente que pido cita',clientId) */
+        const citas = await citaService.getCitaByClientId(clientId);
+
+         console.log('modal fetchcita', citas)
+        setCitas(citas); 
       } catch (error) {
         console.error('Error fetching citas:', error);
       }

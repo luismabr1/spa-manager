@@ -40,6 +40,7 @@ async function authenticate({ username, password }) {
 } 
 
 async function getById(id) {
+  console.log('busco el cliente', id)
     return await Client.findById(id);
 }
 

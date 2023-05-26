@@ -49,15 +49,65 @@ async function getById(id) {
   return cita.clientId
 } */
 
-async function getCitaByClientId(clientId) {
+/* async function getCitaByClientId(clientId) {
   
-/*   const cita = await Cita.findOne({ clientId }); */
+   const cita = await Cita.findOne({ clientId }); 
   const cita = await Client.findOne({ clientId }).exec() 
   if (!cita) {
     throw 'No se encontró ninguna cita para el cliente proporcionado';
   }
   return cita;
+} */
+/* async function getCitaByClientId(clientId) {
+  console.log('llego el client', clientId)
+  const client = await Client.find({_id: clientId});
+  
+  if (!client) {
+    throw 'Cliente no encontrado';
+  }else{
+    const cita = await Cita.find({ clientId: clientId }).exec();
+    console.log('cita de ', clientId, {cita: cita})
+    if (!cita) {
+      throw 'No se encontró ninguna cita para el cliente proporcionado';
+    }
+    return {cita: cita};
+  }
+
+  
+} */
+
+async function getCitaByClientId(clientId) {
+  const client = await Client.findById(clientId);
+  
+  if (!client) {
+    throw 'Cliente no encontrado';
+  }
+
+  const cita = await Cita.findOne({ clientId }).exec();
+  
+  if (!cita) {
+    throw 'No se encontró ninguna cita para el cliente proporcionado';
+  }
+  console.log('cita', cita.cita)
+  
+  return cita.cita;
 }
+
+/* async function getCitaByClientId(clientId) {
+  const client = await Client.findById(clientId);
+  
+  if (!client) {
+    throw 'Cliente no encontrado';
+  }
+
+  const cita = await Cita.findOne({ clientId }).exec();
+  
+  if (!cita) {
+    throw 'No se encontró ninguna cita para el cliente proporcionado';
+  }
+  
+  return cita.cita;
+} */
 
 async function search(searchTerm) {
     return await Client.find({
