@@ -143,10 +143,6 @@ async function createCita(params){
   await cita.save()
 }
 
-async function getCitasByClientId(id){
-  return await Cita.findById(id);
-}
-
 
 
 async function update(id, params) {

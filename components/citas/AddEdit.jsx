@@ -42,14 +42,18 @@ function AddEdit(props) {
       try {
 /*           console.log('del form addedit', data) */
             let message;
-            if (await citaService.getCitaByClientId(clienteId)) {
-/*              await citaService.update(citaId, data);
+/*             if (await citaService.getById(clienteId)) { */
+                /*await citaService.update(citaId, data);
                 message = 'Cita updated'; */
-            
-                await citaService.register(data);
+                const add = await citaService.register(data);
                 message = 'Cita added';
-            }
-            router.push('/clientes');
+/*             } */
+if(add){
+
+  router.reload
+}
+/* router.push('/clientes'); */
+            /* router.push('/clientes'); */
             alertService.success(message, true);
         } catch (error) {
             alertService.error(error);
