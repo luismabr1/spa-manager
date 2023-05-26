@@ -6,7 +6,7 @@ import { fetchWrapper } from 'helpers';
 
 const { publicRuntimeConfig } = getConfig();
 const baseUrl = `${publicRuntimeConfig.apiUrl}/citas`;
-console.log('url base',baseUrl)
+/* console.log('url base',baseUrl) */
 const citaSubject = new BehaviorSubject(typeof window !== 'undefined' && JSON.parse(localStorage.getItem('cita')));
 
 export const citaService = {
@@ -30,7 +30,7 @@ async function getAll() {
 }
 
 async function getCitaByClientId(clientId) {
-    console.log(`compruebo el wrapper que hace el get del client${baseUrl}/${clientId}`)
+/*     console.log(`compruebo el wrapper que hace el get del client${baseUrl}/${clientId}`) */
     return await fetchWrapper.get(`${baseUrl}/${clientId}`); 
   }
 

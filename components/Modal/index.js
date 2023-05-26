@@ -13,7 +13,7 @@ const Modal = ({clientId, clientes}) => {
 /*         console.log('cliente que pido cita',clientId) */
         const citas = await citaService.getCitaByClientId(clientId);
 
-         console.log('modal fetchcita', citas)
+/*          console.log('modal fetchcita', citas) */
         setCitas(citas); 
       } catch (error) {
         console.error('Error fetching citas:', error);

@@ -24,7 +24,7 @@ export default apiHandler({
     return res.status(200).json(client);
 } */
 async function getCitaByClientId(req, res) {
-    console.log('estoy en api/id', req.query)
+/*     console.log('estoy en api/id', req.query) */
     const cita = await citaRepo.getCitaByClientId(req.query.id);
   
     if (!cita) throw 'Cita Not Found';

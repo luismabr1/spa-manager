@@ -12,7 +12,7 @@ import { citaService, alertService } from 'services';
 export { AddEdit };
 
 function AddEdit(props) {
-    console.log('estoy en el addedit de citas',props)
+/*     console.log('estoy en el addedit de citas',props) */
     const clienteId = props?.clientId;
     const citaId = props?.citaId
     const router = useRouter();
@@ -40,7 +40,7 @@ function AddEdit(props) {
 /*       console.log('estoy en addEdit', clienteId, citaId) */
       alertService.clear();
       try {
-          console.log('del form addedit', data)
+/*           console.log('del form addedit', data) */
             let message;
             if (await citaService.getCitaByClientId(clienteId)) {
 /*              await citaService.update(citaId, data);

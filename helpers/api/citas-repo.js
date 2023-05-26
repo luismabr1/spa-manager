@@ -88,7 +88,7 @@ async function getCitaByClientId(clientId) {
   if (!cita) {
     throw 'No se encontró ninguna cita para el cliente proporcionado';
   }
-  console.log('cita', cita.cita)
+/*   console.log('cita', cita.cita) */
   
   return cita.cita;
 }
@@ -124,7 +124,7 @@ async function create(params) {
 /*     if (await Cita.findOne({ cita: params.clienId })) {
         throw 'Cita "' + params.clientId + '" is already taken';
     } */
-    console.log(params)
+/*     console.log(params) */
     const cita = new Cita(params);
 
     // hash password
