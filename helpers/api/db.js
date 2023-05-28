@@ -9,7 +9,8 @@ mongoose.Promise = global.Promise;
 
 export const db = {
     User: userModel(),
-    Client: clientModel()
+    Client: clientModel(),
+    Cita: citaModel()
 };
 
 // mongoose models with schema definitions
@@ -34,7 +35,7 @@ function userModel() {
         }
     });
 
-    return mongoose.models.User || mongoose.model('User', schema);
+    return mongoose.models?.User || mongoose.model('User', schema);
 }
 
 function clientModel() {
@@ -60,3 +61,30 @@ function clientModel() {
 
     return mongoose.models.Client || mongoose.model('Client', schema);
 }
+
+function citaModel() {
+  const schema = new Schema({
+    cita: { type: Date, required: true },
+    clientId: { 
+        type: Schema.Types.ObjectId, 
+        ref: 'Client' },
+  }, {
+    timestamps: true
+  });
+
+  schema.set('toJSON', {
+    virtuals: true,
+    versionKey: false,
+  });
+
+  return mongoose.models.Cita || mongoose.model('Cita', schema);
+}
+
+
+
+
+
+
+
+
+

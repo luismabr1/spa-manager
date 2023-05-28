@@ -5,6 +5,7 @@ import { db } from 'helpers/api';
 
 const { serverRuntimeConfig } = getConfig();
 const Client = db.Client;
+const Cita = db.Cita;
 
 export const clientsRepo = {
     authenticate,
@@ -12,6 +13,8 @@ export const clientsRepo = {
     getById,
     search,
     create,
+    createCita,
+    getCitasByClientId,
     update,
     delete: _delete
 };
@@ -32,11 +35,12 @@ async function authenticate({ username, password }) {
     };
 }
 
-async function getAll() {
+ async function getAll() {
     return await Client.find();
-}
+} 
 
 async function getById(id) {
+/*   console.log('busco el cliente', id) */
     return await Client.findById(id);
 }
 
@@ -66,6 +70,19 @@ async function create(params) {
     // save cliente
     await cliente.save();
 }
+
+async function createCita(params){
+
+  const cita = new Cita(params)
+
+  await cita.save()
+}
+
+async function getCitasByClientId(id){
+  return await Cita.findById(id);
+}
+
+
 
 async function update(id, params) {
     const cliente = await Client.findById(id);

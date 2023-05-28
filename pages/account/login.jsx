@@ -23,9 +23,9 @@ function Login() {
     const { register, handleSubmit, formState } = useForm(formOptions);
     const { errors } = formState;
 
-    function onSubmit({ username/* ,  password  */}) {
+    function onSubmit({ username ,  password}) {
         alertService.clear();
-        return userService.login(username/* ,  password */)
+        return userService.login(username ,  password )
             .then(() => {
                 // get return url from query parameters or default to '/'
                 const returnUrl = router.query.returnUrl || '/';
@@ -33,6 +33,7 @@ function Login() {
             })
             .catch(alertService.error);
     }
+    
 
     return (
         <Layout>
@@ -47,7 +48,7 @@ function Login() {
                         </div> 
                        <div className="mb-3">
                             <label className="form-label">Password</label>
-                            <input name="password" type="text" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
+                            <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
                             <div className="invalid-feedback">{errors.password?.message}</div>
                         </div> 
                         <button disabled={formState.isSubmitting} className="btn btn-primary">

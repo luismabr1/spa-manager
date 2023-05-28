@@ -1,4 +1,3 @@
-import Calendar from 'components/Calendar';
 import Link from 'next/link';
 
 import { userService } from 'services';

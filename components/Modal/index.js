@@ -1,16 +1,37 @@
-import React from 'react';
+import React, {useEffect,useState} from 'react';
 import  moment from 'moment';
 import ExportToPDF from 'components/ExportToPDF';
-const Modal = ({citas, id, clientes}) => {
+import { AddEdit } from 'components/citas';
+import { citaService } from 'services';
+
+
+const Modal = ({clientId, clientes}) => {
+  const [appointment, setCitas] = useState('')
+  useEffect(() => {
+    async function fetchCitas() {
+      try {
+/*         console.log('cliente que pido cita',clientId) */
+        const citas = await citaService.getCitaByClientId(clientId);
+
+/*          console.log('modal fetchcita', citas) */
+        setCitas(citas); 
+      } catch (error) {
+        console.error('Error fetching citas:', error);
+      }
+    }
+  
+    fetchCitas();
+  }, [clientId]);  
+
     return (
         <>
 
 
-<button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={'#modal'+ id}>
+<button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={'#modal'+ clientId}>
 Consultar
 </button>
 
-<div className="modal fade" id={'modal'+ id} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div className="modal fade" id={'modal'+ clientId} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog" role="document">
     <div className="modal-content">
       <div className="modal-header">
@@ -20,11 +41,17 @@ Consultar
         </button>
       </div>
       <div className="modal-body">
-         {moment.utc(citas).format('MMMM/Do/YYYY, h:mm:ss a')}
+        { appointment 
+         ? moment.utc(appointment).format('MMMM/Do/YYYY, h:mm:ss a')
+         :
+         <AddEdit clientId={clientId} citaId={appointment}/>
+        }
+
       </div>
+
       <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <ExportToPDF clientes={clientes} id={id} />
+        <ExportToPDF clientes={clientes} id={clientId} />
       </div>
     </div>
   </div>
@@ -33,4 +60,4 @@ Consultar
     );
 };
 
-export default Modal;
+export default Modal; 
