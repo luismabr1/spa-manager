@@ -40,11 +40,19 @@ function userModel() {
 
 function clientModel() {
     const schema = new Schema({
-        username: { type: String, unique: true, required: true },
-        hash: { type: String, required: true },
+        id_number: { type: String, unique: true ,  required: true  },
+/*         hash: { type: String, required: true }, */
         firstName: { type: String, required: true },
         lastName: { type: String, required: true },
-        cita: { type: Date, required: true }
+        ocupacion: { type: String, required: true },
+        barrio: { type: String, required: true },
+        email: { type: String, required: true },
+        howYouKnowIt: { type: String, required: true },
+        birthDate: { type: Date, required: true },
+        age: { type: String, required: true },
+        gender: { type: String, required: true },
+        phone: { type: String, required: true },
+        cellphone: { type: String, required: true },
     }, {
         // add createdAt and updatedAt timestamps
         timestamps: true
@@ -55,7 +63,7 @@ function clientModel() {
         versionKey: false,
         transform: function (doc, ret) {
             delete ret._id;
-            delete ret.hash;
+/*             delete ret.hash; */
         }
     });
 

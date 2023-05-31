@@ -7,6 +7,7 @@ import { alertService } from './alert.service';
 
 const { publicRuntimeConfig } = getConfig();
 const baseUrl = `${publicRuntimeConfig.apiUrl}/clients`;
+console.log('url base',baseUrl)
 const clientSubject = new BehaviorSubject(typeof window !== 'undefined' && JSON.parse(localStorage.getItem('client')));
 
 export const clientService = {
@@ -46,6 +47,7 @@ function logout() {
 } */
 
 async function register(client) {
+    console.log(client)
     await fetchWrapper.post(`${baseUrl}/register`, client);
 }
 

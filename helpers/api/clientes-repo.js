@@ -8,7 +8,7 @@ const Client = db.Client;
 const Cita = db.Cita;
 
 export const clientsRepo = {
-    authenticate,
+/*     authenticate, */
     getAll,
     getById,
     search,
@@ -18,7 +18,7 @@ export const clientsRepo = {
     update,
     delete: _delete
 };
-
+/* 
 async function authenticate({ username, password }) {
     const cliente = await Client.findOne({ username });
 
@@ -33,7 +33,7 @@ async function authenticate({ username, password }) {
         ...cliente.toJSON(),
         token
     };
-}
+} */
 
  async function getAll() {
     return await Client.find();
@@ -47,25 +47,27 @@ async function getById(id) {
 async function search(searchTerm) {
     return await Client.find({
       $or: [
-        { username: { $regex: searchTerm, $options: 'i' } },
+/*         { username: { $regex: searchTerm, $options: 'i' } }, */
         { firstName: { $regex: searchTerm, $options: 'i' } },
-        { lastName: { $regex: searchTerm, $options: 'i' } }
+        { lastName: { $regex: searchTerm, $options: 'i' } },
+        { id_number: { $regex: searchTerm, $options: 'i' } } 
       ]
     });
   }
 
 async function create(params) {
     // validate
-    if (await Client.findOne({ username: params.username })) {
-        throw 'Username "' + params.username + '" is already taken';
-    }
+    console.log('params de create', params)
+     if (await Client.findOne({ id_number: params.id_number })) {
+        throw 'Client "' + params.id_number + '" is already register';
+    } 
 
     const cliente = new Client(params);
 
     // hash password
-    if (params.password) {
+/*     if (params.password) {
         cliente.hash = bcrypt.hashSync(params.password, 10);
-    }
+    } */
 
     // save cliente
     await cliente.save();
@@ -89,14 +91,14 @@ async function update(id, params) {
 
     // validate
     if (!cliente) throw 'Client not found';
-    if (cliente.username !== params.username && await Client.findOne({ username: params.username })) {
+/*     if (cliente.username !== params.username && await Client.findOne({ username: params.username })) {
         throw 'Username "' + params.username + '" is already taken';
-    }
+    } */
 
-    // hash password if it was entered
+/*     // hash password if it was entered
     if (params.password) {
         params.hash = bcrypt.hashSync(params.password, 10);
-    }
+    } */
 
     // copy params properties to user
     Object.assign(cliente, params);

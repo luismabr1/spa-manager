@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import * as Yup from 'yup';
+import Modal from 'components/Modal';
 
 import { citaService, alertService } from 'services';
 
@@ -48,8 +49,8 @@ function AddEdit(props) {
                 const add = await citaService.register(data);
                 message = 'Cita added';
 /*             } */
+Modal.hide()
 if(add){
-
   router.reload
 }
 /* router.push('/clientes'); */

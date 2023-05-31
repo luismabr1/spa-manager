@@ -15,6 +15,7 @@ const Modal = ({clientId, clientes}) => {
 
 /*          console.log('modal fetchcita', citas) */
         setCitas(citas); 
+        /*  */
       } catch (error) {
         console.error('Error fetching citas:', error);
       }

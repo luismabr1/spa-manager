@@ -10,18 +10,27 @@ function Index() {
     const [clients, setClients] = useState('');
     const [searchTerm, setSearchTerm] = useState(null);
 
-
     const filteredClients = useMemo(() => {
         if (searchTerm) {
-          return clients.filter((client) =>
-            client.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            client.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            client.lastName.toLowerCase().includes(searchTerm.toLowerCase())
+          return clients.filter((client) => {
+            const idNumber = client.id_number ? client.id_number.toString() : ''; // Convertir a cadena si existe, de lo contrario usar cadena vacía
+            return(
+                client.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                client.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                idNumber.includes(searchTerm.toLowerCase())
+            )
+
+          }
+
+        
           );
         } else {
           return clients;
         }
       }, [searchTerm, clients]);
+
+        
+
       
       useEffect(() => {
         if (!filteredClients) {
@@ -42,8 +51,6 @@ function Index() {
     return (
         
         <>
-        
-
         <div className='container'>
         <h1>Clients</h1>
 
@@ -71,7 +78,7 @@ function Index() {
                     <a className="btn" style={{ width: '100%' }} data-bs-toggle="collapse" href={"#collapse" + client.id} >
                     <span >
                                 <h4 className="blockquote" >
-                                    {client.username}
+                                    {client.username || client.id_number}
                                 </h4>
                     </span>
                     </a>

@@ -112,9 +112,10 @@ async function getCitaByClientId(clientId) {
 async function search(searchTerm) {
     return await Client.find({
       $or: [
-        { username: { $regex: searchTerm, $options: 'i' } },
+/*         { username: { $regex: searchTerm, $options: 'i' } }, */
         { firstName: { $regex: searchTerm, $options: 'i' } },
-        { lastName: { $regex: searchTerm, $options: 'i' } }
+        { lastName: { $regex: searchTerm, $options: 'i' } },
+         { id_number: { $regex: searchTerm, $options: 'i' } } 
       ]
     });
   }
@@ -150,14 +151,14 @@ async function update(id, params) {
 
     // validate
     if (!cliente) throw 'Client not found';
-    if (cliente.username !== params.username && await Client.findOne({ username: params.username })) {
+/*     if (cliente.username !== params.username && await Client.findOne({ username: params.username })) {
         throw 'Username "' + params.username + '" is already taken';
-    }
+    } */
 
     // hash password if it was entered
-    if (params.password) {
+/*     if (params.password) {
         params.hash = bcrypt.hashSync(params.password, 10);
-    }
+    } */
 
     // copy params properties to user
     Object.assign(cliente, params);

@@ -5,7 +5,7 @@ export default Add;
 function Add() {
     return (
         <Layout>
-            <h1>Add Client</h1>
+            <h1>Agregar Cliente</h1>
             <AddEdit />
         </Layout>
     );
