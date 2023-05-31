@@ -19,10 +19,7 @@ function Index() {
                 client.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 idNumber.includes(searchTerm.toLowerCase())
             )
-
           }
-
-        
           );
         } else {
           return clients;
@@ -51,7 +48,7 @@ function Index() {
     return (
         
         <>
-        <div className='container'>
+        <div className='container-sm' style={{ width: '300px' }}>
         <h1>Clients</h1>
 
                     <Link href="/clientes/add" className="btn btn-sm btn-success mb-2">Add Client</Link><br/>
@@ -72,7 +69,7 @@ function Index() {
 <div id="accordion">
 {filteredClients && filteredClients.map(client =>
 
-                <div className="card" key={client.id} style={{ width: '500px' }}>
+                <div className="card" key={client.id} style={{ width: '400px' }}>
                 <div className="card-header" >
 
                     <a className="btn" style={{ width: '100%' }} data-bs-toggle="collapse" href={"#collapse" + client.id} >
