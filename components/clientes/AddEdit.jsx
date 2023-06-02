@@ -147,18 +147,18 @@ function AddEdit(props) {
             </div>
 
             <div className="mb-3">
-              <label htmlFor="validationServerUsername" className="form-label">Correo</label>
+              <label htmlFor="validationServerMail" className="form-label">Correo</label>
               <div className="input-group has-validation">
                 <span className="input-group-text" id="inputGroupPrepend3">@</span>
                 <input
                   type="email"
                   className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                  id="validationServerUsername"
-                  aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback"
+                  id="validationServerMail"
+                  aria-describedby="inputGroupPrepend3 validationServerMailFeedback"
                   required
                   {...register('email')}
                 />
-                <div id="validationServerUsernameFeedback" className="invalid-feedback">
+                <div id="validationServerMailFeedback" className="invalid-feedback">
                   Ingrese un correo electrónico válido.
                 </div>
               </div>
@@ -264,7 +264,7 @@ function AddEdit(props) {
           </div>
           
           <div className="mb-3">
-            <button  type="submit"  /* onClick={handleSubmit(onSubmit)} */  disabled={formState.isSubmitting}  className="btn btn-primary me-2">
+            <button  type="submit"  /* onClick={handleSubmit(onSubmit)} */  disabled={formState.isSubmitting} className="btn btn-primary me-2">
                {formState.isSubmitting && <span className="spinner-border spinner-border-sm me-1"></span>}
               Save
             </button>
@@ -273,73 +273,6 @@ function AddEdit(props) {
           </div>
         </form>
       );  
-
-/*       return (
-         <Layout> 
-            <div className="row">
-                <div className="mb-3 col"> 
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                          <div className="mb-3">
-                              <label className="form-label">First Name</label>
-                              <input name="firstName" type="text" {...register('firstName')} className={`form-control ${errors.firstName ? 'is-invalid' : ''}`} />
-                              <div className="invalid-feedback">{errors.firstName?.message}</div>
-                          </div>
-                          <div className="mb-3">
-                              <label className="form-label">Last Name</label>
-                              <input name="lastName" type="text" {...register('lastName')} className={`form-control ${errors.lastName ? 'is-invalid' : ''}`} />
-                              <div className="invalid-feedback">{errors.lastName?.message}</div>
-                          </div>
-                          <div className="mb-3">
-                              <label className="form-label">Username</label>
-                              <input name="username" type="text" {...register('username')} className={`form-control ${errors.username ? 'is-invalid' : ''}`} />
-                              <div className="invalid-feedback">{errors.username?.message}</div>
-                          </div>
-                          <div className="mb-3">
-                              <label className="form-label">Password</label>
-                              <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
-                              <div className="invalid-feedback">{errors.password?.message}</div>
-                          </div>
-
-                          <div className="mb-3">             
-                            <label className="form-label">Cita</label>
-                            <Controller
-                              control={control}
-                              name="appointment"
-                              render={({ field }) => (
-                                <DatePicker
-                                  placeholderText="Select date"
-                                  className={`form-control ${errors.appointment ? 'is-invalid' : ''}`}
-                                  onChange={(date) => field.onChange(date)}
-                                  selected={field.value}
-                                  showIcon
-                                  dateFormat="MM/dd/yyyy h:mm aa"
-                                  showTimeSelect
-                                  timeFormat="p"
-                                />
-                              )}
-                            />
-                            <div className="invalid-feedback">{errors.appointment?.message}</div>
-                          </div>
-                     <button disabled={formState.isSubmitting} className="btn btn-primary">
-                            {formState.isSubmitting && <span className="spinner-border spinner-border-sm me-1"></span>}
-                            Register
-                        </button>
-                        <Link href="/account/login" className="btn btn-link">Cancel</Link> 
-                        <div className="mb-3">
-                          <button type="submit" disabled={formState.isSubmitting} className="btn btn-primary me-2">
-                            {formState.isSubmitting && <span className="spinner-border spinner-border-sm me-1"></span>}
-                            Save
-                          </button>
-                          <button onClick={() => reset(formOptions.defaultValues)} type="button" disabled={formState.isSubmitting} className="btn btn-secondary">Reset</button>
-                          <Link href="/clientes" className="btn btn-link">Cancel</Link>
-                        </div> 
-
-
-                    </form>
-                </div>
-            </div>
-        </Layout>
-    ); */
 }
 
 

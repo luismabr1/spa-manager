@@ -7,7 +7,7 @@ import { alertService } from './alert.service';
 
 const { publicRuntimeConfig } = getConfig();
 const baseUrl = `${publicRuntimeConfig.apiUrl}/clients`;
-console.log('url base',baseUrl)
+/* console.log('url base',baseUrl) */
 const clientSubject = new BehaviorSubject(typeof window !== 'undefined' && JSON.parse(localStorage.getItem('client')));
 
 export const clientService = {
@@ -22,32 +22,8 @@ export const clientService = {
     delete: _delete
 };
 
-/* async function login(username, password) {
-    const client = await fetchWrapper.post(`${baseUrl}/authenticate`, { username, password });
-
-    // publish user to subscribers and store in local storage to stay logged in between page refreshes
-    userSubject.next(user);
-    localStorage.setItem('client', JSON.stringify(user));
-}
-
-async function login2(username, password) {
-    const user = await fetchWrapper.post(`${baseUrl}/authenticate`, { username, password });
-
-    // publish user to subscribers and store in local storage to stay logged in between page refreshes
-    userSubject.next(user);
-    localStorage.setItem('client', JSON.stringify(client));
-}
-
-function logout() {
-    alertService.clear();
-    // remove user from local storage, publish null to user subscribers and redirect to login page
-    localStorage.removeItem('user');
-    userSubject.next(null);
-    Router.push('/account/login');
-} */
-
 async function register(client) {
-    console.log(client)
+/*     console.log(client) */
     await fetchWrapper.post(`${baseUrl}/register`, client);
 }
 
@@ -77,8 +53,4 @@ async function update(id, params) {
 async function _delete(id) {
     await fetchWrapper.delete(`${baseUrl}/${id}`);
 
-    // auto logout if the logged in user deleted their own record
-    if (id === clientSubject.value.id) {
-        logout();
-    }
 }

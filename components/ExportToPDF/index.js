@@ -36,7 +36,7 @@ function ExportToPDF({ clientes, clientId }) {
       y += 10;
 
       // Agregar username
-      doc.text(`Username: ${client.username}`, x, y);
+      doc.text(`Username: ${client.id_number}`, x, y);
       y += 10;
 
       // Separador

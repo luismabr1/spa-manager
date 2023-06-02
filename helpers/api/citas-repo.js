@@ -8,7 +8,6 @@ const Client = db.Client;
 const Cita = db.Cita;
 
 export const citaRepo = {
-    authenticate,
     getAll,
     getById,
     search,
@@ -19,7 +18,7 @@ export const citaRepo = {
     delete: _delete
 };
 
-async function authenticate({ username, password }) {
+/* async function authenticate({ username, password }) {
     const cliente = await Client.findOne({ username });
 
     if (!(cliente || bcrypt.compareSync(password, cliente.hash))) {
@@ -33,7 +32,7 @@ async function authenticate({ username, password }) {
         ...cliente.toJSON(),
         token
     };
-}
+} */
 
 async function getAll() {
     return await Cita.find();
@@ -42,39 +41,6 @@ async function getAll() {
 async function getById(id) {
     return await Cita.findById(id);
 }
-
-/* async function getCLientWithCitaById(id){
-  cita = await Cita.findById(id)
-
-  return cita.clientId
-} */
-
-/* async function getCitaByClientId(clientId) {
-  
-   const cita = await Cita.findOne({ clientId }); 
-  const cita = await Client.findOne({ clientId }).exec() 
-  if (!cita) {
-    throw 'No se encontró ninguna cita para el cliente proporcionado';
-  }
-  return cita;
-} */
-/* async function getCitaByClientId(clientId) {
-  console.log('llego el client', clientId)
-  const client = await Client.find({_id: clientId});
-  
-  if (!client) {
-    throw 'Cliente no encontrado';
-  }else{
-    const cita = await Cita.find({ clientId: clientId }).exec();
-    console.log('cita de ', clientId, {cita: cita})
-    if (!cita) {
-      throw 'No se encontró ninguna cita para el cliente proporcionado';
-    }
-    return {cita: cita};
-  }
-
-  
-} */
 
 async function getCitaByClientId(clientId) {
   const client = await Client.findById(clientId);
@@ -85,9 +51,9 @@ async function getCitaByClientId(clientId) {
 
   const cita = await Cita.findOne({ clientId }).exec();
   
-  if (!cita) {
+/*   if (!cita) {
     throw 'No se encontró ninguna cita para el cliente proporcionado';
-  }
+  } */
 /*   console.log('cita', cita.cita) */
   
   return cita.cita;

@@ -9,6 +9,24 @@ export default Index;
 function Index() {
     const [clients, setClients] = useState('');
     const [searchTerm, setSearchTerm] = useState(null);
+    const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+    const [debounceTimer, setDebounceTimer] = useState(null);
+
+    const handleChangeSearchTerm = useCallback((e) => {
+        const value = e.target.value;
+        setSearchTerm(value);
+    // Cancelar el temporizador existente
+    if (debounceTimer) {
+        clearTimeout(debounceTimer);
+      }
+
+          // Iniciar un nuevo temporizador
+    const timer = setTimeout(() => {
+        setDebouncedSearchTerm(value);
+      }, 300);
+    
+      setDebounceTimer(timer);
+    }, []);
 
     const filteredClients = useMemo(() => {
         if (searchTerm) {
@@ -27,23 +45,27 @@ function Index() {
       }, [searchTerm, clients]);
 
         
-
-      
       useEffect(() => {
-        if (!filteredClients) {
-          clientService.getAll().then((x) => setClients(x));
-        }
-      }, [filteredClients]);
+    // Obtener los clientes cuando cambia el debouncedSearchTerm
+    if (debouncedSearchTerm !== null) {
+        clientService.getAll().then((x) => setClients(x));
+      }
+    }, [debouncedSearchTerm]);
 
-    const deleteClient = useCallback((id) => {
-        setClients(clients.map(x => {
-            if (x.id === id) { x.isDeleting = true; }
-            return x;
-        }));
-        clientService.delete(id).then(() => {
-            setClients(clients => clients.filter(x => x.id !== id));
-        });
-    }, []);
+const deleteClient = useCallback((id) => {
+  setClients((prevClients) => {
+    return prevClients.map((client) => {
+      if (client.id === id) {
+        return { ...client, isDeleting: true };
+      }
+      return client;
+    });
+  });
+
+  clientService.delete(id).then(() => {
+    setClients((prevClients) => prevClients.filter((client) => client.id !== id));
+  });
+}, [clients]); // Agregar "clients" como dependencia
 
     return (
         
@@ -59,7 +81,7 @@ function Index() {
                             placeholder="Search"
                             aria-label="Search"
                             value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
+                            onChange={handleChangeSearchTerm}
                         />
                     </form>
 
@@ -69,13 +91,13 @@ function Index() {
 <div id="accordion">
 {filteredClients && filteredClients.map(client =>
 
-                <div className="card" key={client.id} style={{ width: '400px' }}>
+                <div className="card" key={client.id} style={{ width: '500px' }}>
                 <div className="card-header" >
 
                     <a className="btn" style={{ width: '100%' }} data-bs-toggle="collapse" href={"#collapse" + client.id} >
                     <span >
                                 <h4 className="blockquote" >
-                                    {client.username || client.id_number}
+                                    {client.id_number}
                                 </h4>
                     </span>
                     </a>
@@ -93,11 +115,10 @@ function Index() {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                        
                                                     <tr key={client.id}>
                                                         <td>{client.firstName}</td>
                                                         <td>{client.lastName}</td>
-                                                        <td>{client.username}</td>
+                                                        <td>{client.id_number}</td>
                                                         <td>{  <Modal clientId={client.id} />  }</td>
                                                         <td style={{ whiteSpace: 'nowrap' }}>
                                                             <Link href={`/clientes/edit/${client.id}`} className="btn btn-sm btn-primary me-1">Edit</Link>
@@ -159,6 +180,4 @@ function Index() {
 
 
 
-}
-
-
+} 

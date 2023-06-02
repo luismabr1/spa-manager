@@ -33,7 +33,7 @@ function Index() {
                     <tr>
                         <th style={{ width: '30%' }}>First Name</th>
                         <th style={{ width: '30%' }}>Last Name</th>
-                        <th style={{ width: '30%' }}>Username</th>
+                        <th style={{ width: '30%' }}>ID</th>
                         <th style={{ width: '10%' }}></th>
                     </tr>
                 </thead>

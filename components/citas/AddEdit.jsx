@@ -46,14 +46,11 @@ function AddEdit(props) {
 /*             if (await citaService.getById(clienteId)) { */
                 /*await citaService.update(citaId, data);
                 message = 'Cita updated'; */
-                const add = await citaService.register(data);
+                await citaService.register(data);
                 message = 'Cita added';
 /*             } */
-Modal.hide()
-if(add){
-  router.reload
-}
-/* router.push('/clientes'); */
+                  props.onSuccess(); // Cerrar el modal
+               router.push('/clientes');  
             /* router.push('/clientes'); */
             alertService.success(message, true);
         } catch (error) {
@@ -70,7 +67,6 @@ if(add){
                     <input name="clientId" value={clienteId} type="hidden" {...register('clientId')} className={`form-control ${errors.clientId ? 'is-invalid' : ''}`} />
                     <div className="invalid-feedback">{errors.clientId?.message}</div>
                 </div>
-            {/* <input type="hidden" value={clienteId} name="clientId" {...register('clientId')} /> */}
            <div className="mb-3">
               <label className="form-label">Cita</label>
               <Controller
@@ -86,7 +82,6 @@ if(add){
                     dateFormat="MM/dd/yyyy h:mm aa"
                     showTimeSelect
                     timeFormat="p"
-                    /* locale="es-VE" */
                   />
                 )}
               />

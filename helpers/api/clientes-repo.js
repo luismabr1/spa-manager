@@ -18,23 +18,6 @@ export const clientsRepo = {
     update,
     delete: _delete
 };
-/* 
-async function authenticate({ username, password }) {
-    const cliente = await Client.findOne({ username });
-
-    if (!(cliente || bcrypt.compareSync(password, cliente.hash))) {
-        throw 'Username or password is incorrect';
-    }
-
-    // create a jwt token that is valid for 7 days
-    const token = jwt.sign({ sub: cliente.id }, serverRuntimeConfig.secret, { expiresIn: '7d' });
-
-    return {
-        ...cliente.toJSON(),
-        token
-    };
-} */
-
  async function getAll() {
     return await Client.find();
 } 
@@ -47,7 +30,6 @@ async function getById(id) {
 async function search(searchTerm) {
     return await Client.find({
       $or: [
-/*         { username: { $regex: searchTerm, $options: 'i' } }, */
         { firstName: { $regex: searchTerm, $options: 'i' } },
         { lastName: { $regex: searchTerm, $options: 'i' } },
         { id_number: { $regex: searchTerm, $options: 'i' } } 
@@ -57,17 +39,12 @@ async function search(searchTerm) {
 
 async function create(params) {
     // validate
-    console.log('params de create', params)
-     if (await Client.findOne({ id_number: params.id_number })) {
+/*     console.log('params de create', params) */
+/*      if (await Client.findOne({ id_number: params.id_number })) {
         throw 'Client "' + params.id_number + '" is already register';
-    } 
+    }  */
 
     const cliente = new Client(params);
-
-    // hash password
-/*     if (params.password) {
-        cliente.hash = bcrypt.hashSync(params.password, 10);
-    } */
 
     // save cliente
     await cliente.save();

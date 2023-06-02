@@ -40,7 +40,7 @@ function userModel() {
 
 function clientModel() {
     const schema = new Schema({
-        id_number: { type: String, unique: true ,  required: true  },
+        id_number: { type: String, unique: true, required: true  },
 /*         hash: { type: String, required: true }, */
         firstName: { type: String, required: true },
         lastName: { type: String, required: true },
