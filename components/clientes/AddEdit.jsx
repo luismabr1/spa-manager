@@ -218,6 +218,7 @@ function AddEdit(props) {
             </div>
 
             <div className="mb-3">
+            <label className="form-label">Sexo</label>
                 <select className={`form-control ${errors.consultType ? 'is-invalid' : ''} form-select`}{...register("gender")} aria-label="Default select example">
                   <option selected>Open this select menu</option>
                   <option value="female">female</option>

@@ -27,3 +27,61 @@ html {
 .extend-card{
     width: 100%;
 }
+
+.react-datepicker__day--disabled {
+    color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .react-datepicker__day--disabled:hover {
+    background-color: #f8d7da;
+  }
+  
+  .react-datepicker__day--disabled.react-datepicker__day--keyboard-selected {
+    background-color: #f8d7da;
+  }
+  
+  .react-datepicker__day--disabled.react-datepicker__day--selected {
+    background-color: #f8d7da;
+  }
+
+/* .date-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);  Cambia el valor de opacidad según tus necesidades 
+    pointer-events: none;
+    z-index: 9999;  Asegúrate de que el z-index sea mayor que el del DatePicker 
+  } */
+
+/* .tooltip {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: inline-block;
+    padding: 5px;
+    background-color: #333;
+    color: #fff;
+  }
+
+.tooltip-trigger {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .disabled-date {
+    color: #ccc;
+    pointer-events: none;
+  }
+  
+  .tooltip {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: inline-block;
+    padding: 5px;
+    background-color: #333;
+    color: #fff;
+  } */

@@ -14,6 +14,7 @@ export const citaService = {
     get citaValue() { return citaSubject.value },
     register,
     getAll,
+    getClient,
     getById,
     getCitaByClientId, 
     update,
@@ -26,6 +27,10 @@ async function register(cita) {
 }
 
 async function getAll() {
+    return await fetchWrapper.get(baseUrl);
+}
+
+async function getClient() {
     return await fetchWrapper.get(baseUrl);
 }
 

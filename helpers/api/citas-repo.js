@@ -14,6 +14,7 @@ export const citaRepo = {
     create,
     createCita,
     getCitaByClientId,
+    getCitaByDate,
     update,
     delete: _delete
 };
@@ -37,6 +38,15 @@ export const citaRepo = {
 async function getAll() {
     return await Cita.find();
 }
+async function getCitaByDate(citaDate) {
+  const cita = await Cita.findOne({ cita: citaDate }).exec();
+  
+  if (!cita) {
+    throw 'No se encontró ninguna cita para la fecha proporcionada';
+  }
+  
+  return cita.clientId;
+}
 
 async function getById(id) {
     return await Cita.findById(id);
@@ -59,21 +69,6 @@ async function getCitaByClientId(clientId) {
   return cita.cita;
 }
 
-/* async function getCitaByClientId(clientId) {
-  const client = await Client.findById(clientId);
-  
-  if (!client) {
-    throw 'Cliente no encontrado';
-  }
-
-  const cita = await Cita.findOne({ clientId }).exec();
-  
-  if (!cita) {
-    throw 'No se encontró ninguna cita para el cliente proporcionado';
-  }
-  
-  return cita.cita;
-} */
 
 async function search(searchTerm) {
     return await Client.find({
@@ -117,16 +112,7 @@ async function update(id, params) {
 
     // validate
     if (!cliente) throw 'Client not found';
-/*     if (cliente.username !== params.username && await Client.findOne({ username: params.username })) {
-        throw 'Username "' + params.username + '" is already taken';
-    } */
 
-    // hash password if it was entered
-/*     if (params.password) {
-        params.hash = bcrypt.hashSync(params.password, 10);
-    } */
-
-    // copy params properties to user
     Object.assign(cliente, params);
 
     await cliente.save();
@@ -135,3 +121,5 @@ async function update(id, params) {
 async function _delete(id) {
     await Client.findByIdAndRemove(id);
 }
+
+
