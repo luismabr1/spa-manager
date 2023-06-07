@@ -261,7 +261,7 @@ const AddEdit = (props) => {
       );
 }; */
 
-import React, { useEffect, useState } from 'react';
+/* import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
@@ -383,5 +383,596 @@ const AddEdit = (props) => {
       </div>
     </form>
   );
+}; */
+
+/* import React, { useEffect, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import Link from 'next/link';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import * as Yup from 'yup';
+import { citaService } from 'services';
+
+export { AddEdit };
+
+const AddEdit = (props) => {
+  const [disabledDates, setDisabledDates] = useState([]);
+  const [citas, setCitas] = useState([]);
+  const [hoveredDate, setHoveredDate] = useState(null);
+
+  useEffect(() => {
+    async function fetchCitas() {
+      try {
+        const citas = await citaService.getAll();
+        const disabledDates = citas.map((cita) => new Date(cita.cita));
+        setDisabledDates(disabledDates);
+        setCitas(citas);
+      } catch (error) {
+        console.error('Error fetching citas:', error);
+      }
+    }
+
+    fetchCitas();
+  }, []);
+
+  const validationSchema = Yup.object().shape({
+    cita: Yup.date().required('Fecha is required'),
+  });
+
+  const formOptions = {
+    resolver: yupResolver(validationSchema),
+    defaultValues: props.clienteId ? { ...props.clienteId } : {},
+  };
+
+  const { control, handleSubmit, reset, formState } = useForm(formOptions);
+  const { errors } = formState;
+
+  const handleHover = (date) => {
+    setHoveredDate(date);
+  };
+
+  const handleResetHover = () => {
+    setHoveredDate(null);
+  };
+
+  const renderDayContents = (day, date) => {
+    const formattedDate = date.toDateString();
+    const isDisabled = disabledDates.some(disabledDate =>
+      disabledDate.toDateString() === formattedDate
+    );
+
+    const dayClass = isDisabled ? 'disabled-date' : '';
+    const hoveredClass = isDisabled && hoveredDate === formattedDate ? 'hovered' : '';
+
+    return (
+      <div
+        className={`calendar-day ${dayClass} ${hoveredClass}`}
+        onMouseEnter={() => handleHover(formattedDate)}
+        onMouseLeave={handleResetHover}
+      >
+        {day}
+        {isDisabled && hoveredDate === formattedDate && (
+          <div className="tooltip">
+            This date is disabled.
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const onSubmit = async (data) => {
+    alertService.clear();
+    try {
+      await citaService.register(data);
+      const message = 'Cita added';
+      props.onSuccess();
+      router.push('/clientes');
+      alertService.success(message, true);
+    } catch (error) {
+      alertService.error(error);
+      console.error(error);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="mb-3">
+        <label className="form-label">Cita</label>
+        <Controller
+          control={control}
+          name="cita"
+          render={({ field }) => (
+            <div className="datepicker-wrapper">
+              <DatePicker
+                placeholderText="Select date"
+                className={`form-control ${errors.cita ? 'is-invalid' : ''}`}
+                dayClassName={(date) =>
+                  disabledDates.includes(date) ? 'disabled-date' : ''
+                }
+                renderDayContents={renderDayContents}
+                onChange={(date) => field.onChange(date)}
+                selected={field.value}
+                showIcon
+                dateFormat="MM/dd/yyyy h:mm aa"
+                showTimeSelect
+                timeFormat="p"
+                excludeDates={disabledDates}
+              />
+              {hoveredDate && (
+                <div className="overlay" />
+              )}
+            </div>
+          )}
+        />
+        <div className="invalid-feedback">{errors.cita?.message}</div>
+      </div>
+      <div className="mb-3">
+        <button type="submit" disabled={formState.isSubmitting} className="btn btn-primary me-2">
+          {formState.isSubmitting && <span className="spinner-border spinner-border-sm me-1"></span>}
+          Save
+        </button>
+        <button onClick={() => reset(formOptions.defaultValues)} type="button" disabled={formState.isSubmitting} className="btn btn-secondary">Reset</button>
+        <Link href="/clientes" className="btn btn-link">Cancel</Link>
+      </div>
+    </form>
+  );
+}; */
+
+/* import React, { useEffect, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import Link from 'next/link';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import * as Yup from 'yup';
+import { citaService } from 'services';
+
+export { AddEdit };
+
+const AddEdit = (props) => {
+  const [disabledDates, setDisabledDates] = useState([]);
+  const [citas, setCitas] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hoveredDate, setHoveredDate] = useState(null);
+
+  useEffect(() => {
+    async function fetchCitas() {
+      try {
+        const citas = await citaService.getAll();
+        const disabledDates = citas.map((cita) => new Date(cita.cita));
+        setDisabledDates(disabledDates);
+        setCitas(citas);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching citas:', error);
+      }
+    }
+
+    fetchCitas();
+  }, []);
+
+  const validationSchema = Yup.object().shape({
+    cita: Yup.date().required('Fecha is required'),
+  });
+
+  const formOptions = {
+    resolver: yupResolver(validationSchema),
+    defaultValues: props.clienteId ? { ...props.clienteId } : {},
+  };
+
+  const { control, handleSubmit, reset, formState } = useForm(formOptions);
+  const { errors } = formState;
+
+  const handleHover = (date) => {
+    setHoveredDate(date);
+  };
+
+  const handleResetHover = () => {
+    setHoveredDate(null);
+  };
+
+  const renderDayContents = (day, date) => {
+    const formattedDate = date.toDateString();
+    const isDisabled = disabledDates.some(
+      (disabledDate) => disabledDate.toDateString() === formattedDate
+    );
+
+    const dayClass = isDisabled ? 'disabled-date' : '';
+    const hoveredClass =
+      isDisabled && hoveredDate === formattedDate ? 'hovered' : '';
+
+    return (
+      <div
+        className={`calendar-day ${dayClass} ${hoveredClass}`}
+        onMouseEnter={() => handleHover(formattedDate)}
+        onMouseLeave={handleResetHover}
+      >
+        {day}
+      </div>
+    );
+  };
+
+  const onSubmit = async (data) => {
+    alertService.clear();
+    try {
+      await citaService.register(data);
+      const message = 'Cita added';
+      props.onSuccess();
+      router.push('/clientes');
+      alertService.success(message, true);
+    } catch (error) {
+      alertService.error(error);
+      console.error(error);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="mb-3">
+        <label className="form-label">Cita</label>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <Controller
+            control={control}
+            name="cita"
+            render={({ field }) => (
+              <DatePicker
+                placeholderText="Select date"
+                className={`form-control ${errors.cita ? 'is-invalid' : ''}`}
+                dayClassName={(date) =>
+                  disabledDates.includes(date) ? 'disabled-date' : ''
+                }
+                renderDayContents={renderDayContents}
+                onChange={(date) => field.onChange(date)}
+                selected={field.value}
+                showIcon
+                dateFormat="MM/dd/yyyy h:mm aa"
+                showTimeSelect
+                timeFormat="p"
+                excludeDates={disabledDates}
+              />
+            )}
+          />
+        )}
+        <div className="invalid-feedback">{errors.cita?.message}</div>
+      </div>
+      <div className="mb-3">
+        <button
+          type="submit"
+          disabled={formState.isSubmitting}
+          className="btn btn-primary me-2"
+        >
+          {formState.isSubmitting && (
+            <span className="spinner-border spinner-border-sm me-1"></span>
+          )}
+          Save
+        </button>
+        <button
+          onClick={() => reset(formOptions.defaultValues)}
+          type="button"
+          disabled={formState.isSubmitting}
+          className="btn btn-secondary"
+        >
+          Reset
+        </button>
+        <Link href="/clientes" className="btn btn-link">
+          Cancel
+        </Link>
+      </div>
+    </form>
+  );
+}; */
+
+import React, { useEffect, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import Link from 'next/link';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import * as Yup from 'yup';
+import { citaService } from 'services';
+
+export { AddEdit };
+
+const AddEdit = (props) => {
+  const [disabledDates, setDisabledDates] = useState([]);
+  const [citas, setCitas] = useState([]);
+  const [hoveredDate, setHoveredDate] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchCitas() {
+      try {
+        const citas = await citaService.getAll();
+        const disabledDates = citas.map((cita) => new Date(cita.cita));
+        setDisabledDates(disabledDates);
+        setCitas(citas);
+      } catch (error) {
+        console.error('Error fetching citas:', error);
+      }finally {
+        setIsLoading(false); // Una vez que se hayan cargado las fechas deshabilitadas, establece loading en false
+      }
+    }
+
+    fetchCitas();
+  }, []);
+
+  const validationSchema = Yup.object().shape({
+    cita: Yup.date().required('Fecha is required'),
+  });
+
+  const formOptions = {
+    resolver: yupResolver(validationSchema),
+    defaultValues: props.clienteId ? { ...props.clienteId } : {},
+  };
+
+  const { control, handleSubmit, reset, formState } = useForm(formOptions);
+  const { errors } = formState;
+
+  const handleHover = (date) => {
+    setHoveredDate(date);
+  };
+
+  const handleResetHover = () => {
+    setHoveredDate(null);
+  };
+
+  const renderDayContents = (day, date) => {
+    const formattedDate = date.toDateString();
+    const isDisabled = disabledDates.some(
+      (disabledDate) => disabledDate.toDateString() === formattedDate
+    );
+
+    const dayClass = isDisabled ? 'disabled-date' : '';
+    const hoveredClass =
+      isDisabled && hoveredDate === formattedDate ? 'hovered' : '';
+
+    return (
+      <div
+        className={`calendar-day ${dayClass} ${hoveredClass}`}
+        onMouseEnter={() => handleHover(formattedDate)}
+        onMouseLeave={handleResetHover}
+        onClick={() => {
+          if (isDisabled) {
+            // Realiza alguna acción al hacer clic en una fecha deshabilitada
+            console.log('Fecha deshabilitada clickeada:', formattedDate);
+          } else {
+            // Realiza alguna acción al hacer clic en una fecha habilitada
+            console.log('Fecha habilitada clickeada:', formattedDate);
+          }
+        }}
+      >
+        {day}
+      </div>
+    );
+  };
+
+  const onSubmit = async (data) => {
+    alertService.clear();
+    try {
+      await citaService.register(data);
+      const message = 'Cita added';
+      props.onSuccess();
+      router.push('/clientes');
+      alertService.success(message, true);
+    } catch (error) {
+      alertService.error(error);
+      console.error(error);
+    }
+  };
+
+  return (
+
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="mb-3">
+        <label className="form-label">Cita</label>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+        <Controller
+          control={control}
+          name="cita"
+          render={({ field }) => (
+            <DatePicker
+              placeholderText="Select date"
+              className={`form-control ${errors.cita ? 'is-invalid' : ''}`}
+              renderDayContents={renderDayContents}
+              onChange={(date) => field.onChange(date)}
+              selected={field.value}
+              showIcon
+              dateFormat="MM/dd/yyyy h:mm aa"
+              showTimeSelect
+              timeFormat="p"
+            />
+          )}
+        />
+        )}
+        <div className="invalid-feedback">{errors.cita?.message}</div>
+      </div>
+      <div className="mb-3">
+        <button
+          type="submit"
+          disabled={formState.isSubmitting}
+          className="btn btn-primary me-2"
+        >
+          {formState.isSubmitting && (
+            <span className="spinner-border spinner-border-sm me-1"></span>
+          )}
+          Save
+        </button>
+        <button
+          onClick={() => reset(formOptions.defaultValues)}
+          type="button"
+          disabled={formState.isSubmitting}
+          className="btn btn-secondary"
+        >
+          Reset
+        </button>
+        <Link href="/clientes" className="btn btn-link">
+          Cancel
+        </Link>
+      </div>
+    </form>
+  );
+}; 
+/* 
+import React, { useEffect, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import Link from 'next/link';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import * as Yup from 'yup';
+import { citaService } from 'services';
+
+export { AddEdit };
+
+const AddEdit = (props) => {
+  const [disabledDates, setDisabledDates] = useState([]);
+  const [citas, setCitas] = useState([]);
+  const [hoveredDate, setHoveredDate] = useState(null);
+  const [loading, setLoading] = useState(true); // Estado para controlar la carga de las fechas deshabilitadas
+
+  useEffect(() => {
+    async function fetchCitas() {
+      try {
+        const citas = await citaService.getAll();
+        const disabledDates = citas.map((cita) => new Date(cita.cita));
+        setDisabledDates(disabledDates);
+        setCitas(citas);
+      } catch (error) {
+        console.error('Error fetching citas:', error);
+      } finally {
+        setLoading(false); // Una vez que se hayan cargado las fechas deshabilitadas, establece loading en false
+      }
+    }
+
+    fetchCitas();
+  }, []);
+
+  const validationSchema = Yup.object().shape({
+    cita: Yup.date().required('Fecha is required'),
+  });
+
+  const formOptions = {
+    resolver: yupResolver(validationSchema),
+    defaultValues: props.clienteId ? { ...props.clienteId } : {},
+  };
+
+  const { control, handleSubmit, reset, formState } = useForm(formOptions);
+  const { errors } = formState;
+
+  const handleHover = (date) => {
+    setHoveredDate(date);
+  };
+
+  const handleResetHover = () => {
+    setHoveredDate(null);
+  };
+
+  const renderDayContents = (day, date) => {
+    const formattedDate = date.toDateString();
+    const isDisabled = disabledDates.some(
+      (disabledDate) => disabledDate.toDateString() === formattedDate
+    );
+
+    const dayClass = isDisabled ? 'disabled-date' : '';
+    const hoveredClass =
+      isDisabled && hoveredDate === formattedDate ? 'hovered' : '';
+
+    return (
+      <div
+        className={`calendar-day ${dayClass} ${hoveredClass}`}
+        onMouseEnter={() => handleHover(formattedDate)}
+        onMouseLeave={handleResetHover}
+        onClick={() => {
+          if (isDisabled) {
+            // Realiza alguna acción al hacer clic en una fecha deshabilitada
+            console.log('Fecha deshabilitada clickeada:', formattedDate);
+          } else {
+            // Realiza alguna acción al hacer clic en una fecha habilitada
+            console.log('Fecha habilitada clickeada:', formattedDate);
+          }
+        }}
+      >
+        {day}
+      </div>
+    );
+  };
+
+  const onSubmit = async (data) => {
+    alertService.clear();
+    try {
+      await citaService.register(data);
+      const message = 'Cita added';
+      props.onSuccess();
+      router.push('/clientes');
+      alertService.success(message, true);
+    } catch (error) {
+      alertService.error(error);
+      console.error(error);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="mb-3">
+        <label className="form-label">Cita</label>
+        {loading ? (
+          <div>Loading disabled dates...</div> // Muestra un mensaje de carga mientras se están cargando las fechas deshabilitadas
+        ) : (
+          <Controller
+            control={control}
+            name="cita"
+            render={({ field }) => (
+              <DatePicker
+                placeholderText="Select date"
+                className={`form-control ${errors.cita ? 'is-invalid' : ''}`}
+                renderDayContents={renderDayContents}
+                onChange={(date) => field.onChange(date)}
+                selected={field.value}
+                showIcon
+                dateFormat="MM/dd/yyyy h:mm aa"
+                showTimeSelect
+                timeFormat="p"
+                excludeDates={disabledDates}
+              />
+            )}
+          />
+        )}
+        <div className="invalid-feedback">{errors.cita?.message}</div>
+      </div>
+      <div className="mb-3">
+        <button
+          type="submit"
+          disabled={formState.isSubmitting}
+          className="btn btn-primary me-2"
+        >
+          {formState.isSubmitting && (
+            <span className="spinner-border spinner-border-sm me-1"></span>
+          )}
+          Save
+        </button>
+        <button
+          onClick={() => reset(formOptions.defaultValues)}
+          type="button"
+          disabled={formState.isSubmitting}
+          className="btn btn-secondary"
+        >
+          Reset
+        </button>
+        <Link href="/clientes" className="btn btn-link">
+          Cancel
+        </Link>
+      </div>
+    </form>
+  );
 };
+ */
+
+
+
+
 
