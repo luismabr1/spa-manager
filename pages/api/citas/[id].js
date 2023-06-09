@@ -27,7 +27,7 @@ async function getCitaByClientId(req, res) {
 /*     console.log('estoy en api/id', req.query) */
     const cita = await citaRepo.getCitaByClientId(req.query.id);
   
-    if (!cita) throw 'Cita Not Found';
+/*     if (!cita) throw 'Cita Not Found'; */
   
     return res.status(200).json(cita);
   }

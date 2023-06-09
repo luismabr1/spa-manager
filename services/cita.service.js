@@ -17,6 +17,7 @@ export const citaService = {
     getClient,
     getById,
     getCitaByClientId, 
+    getClientIdByCita,
     update,
     delete: _delete
 };
@@ -38,6 +39,11 @@ async function getCitaByClientId(clientId) {
 /*     console.log(`compruebo el wrapper que hace el get del client${baseUrl}/${clientId}`) */
     return await fetchWrapper.get(`${baseUrl}/${clientId}`); 
   }
+
+  async function getClientIdByCita(clientId) {
+    /*     console.log(`compruebo el wrapper que hace el get del client${baseUrl}/${clientId}`) */
+        return await fetchWrapper.get(`${baseUrl}/${clientId}`); 
+      }  
 
 async function getById(id) {
     return await fetchWrapper.get(`${baseUrl}/${id}`);

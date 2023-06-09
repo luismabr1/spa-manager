@@ -14,36 +14,22 @@ export const citaRepo = {
     create,
     createCita,
     getCitaByClientId,
+    getClientIdByCita,
     getCitaByDate,
     update,
     delete: _delete
 };
 
-/* async function authenticate({ username, password }) {
-    const cliente = await Client.findOne({ username });
-
-    if (!(cliente || bcrypt.compareSync(password, cliente.hash))) {
-        throw 'Username or password is incorrect';
-    }
-
-    // create a jwt token that is valid for 7 days
-    const token = jwt.sign({ sub: cliente.id }, serverRuntimeConfig.secret, { expiresIn: '7d' });
-
-    return {
-        ...cliente.toJSON(),
-        token
-    };
-} */
-
 async function getAll() {
     return await Cita.find();
 }
 async function getCitaByDate(citaDate) {
+  console.log('veo que llega a getCitaByDate',citaDate)
   const cita = await Cita.findOne({ cita: citaDate }).exec();
   
-  if (!cita) {
+/*   if (!cita) {
     throw 'No se encontró ninguna cita para la fecha proporcionada';
-  }
+  } */
   
   return cita.clientId;
 }
@@ -61,12 +47,17 @@ async function getCitaByClientId(clientId) {
 
   const cita = await Cita.findOne({ clientId }).exec();
   
-/*   if (!cita) {
-    throw 'No se encontró ninguna cita para el cliente proporcionado';
-  } */
-/*   console.log('cita', cita.cita) */
-  
+ 
   return cita.cita;
+}
+
+async function getClientIdByCita(date) {
+  const cita = await Cita.findOne({ cita: date });
+  if (cita) {
+    return cita.clientId;
+  } else {
+    return null;
+  }
 }
 
 
